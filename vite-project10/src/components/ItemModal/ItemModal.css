@@ -1,0 +1,37 @@
+.modal__content {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal__content_type_image {
+  position: relative;
+  padding: 0;
+}
+.modal__image {
+  height: 498px;
+  width: 100%;
+  border-radius: 20px;
+}
+.modal__close {
+  position: absolute;
+  border: none;
+  background-color: transparent;
+}
+.modal__footer {
+  font-family: Cabinet Grotesk;
+  font-weight: 700;
+  font-style: Bold;
+  font-size: 20px;
+  color: rgba(0, 0, 0, 1);
+  line-height: 24px;
+}
+.modal__caption {
+  margin-bottom: 12px;
+  margin-left: 32px;
+}
+.modal__weather {
+  padding-left: 32px;
+  padding-bottom: 32px;
+
+  margin: 0;
+}

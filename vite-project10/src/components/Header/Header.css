@@ -9,6 +9,14 @@
 .header__add-clothes-btn {
   margin-left: auto;
   margin-right: 20px;
+  font-family: Cabinet Grotesk;
+  font-weight: 700;
+  font-style: Bold;
+  font-size: 20px;
+  leading-trim: NONE;
+  line-height: 24px;
+  border: none;
+  color: rgba(0, 0, 0, 1);
 }
 .header__date-and-location {
   margin: 0;
@@ -20,4 +28,10 @@
 }
 .header__username {
   margin: 0;
+  font-family: Cabinet Grotesk;
+  font-weight: 700;
+  font-style: Bold;
+  font-size: 20px;
+  line-height: 100%;
+  color: rgba(0, 0, 0, 1);
 }
