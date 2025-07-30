@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import Header from "../Header/Header.jsx";
 import Main from "../Main/Main.jsx";
 import ModalWithForm from "../ModalWithForm/ModalWithForm.jsx";
 import ItemModal from "../ItemModal/ItemModal.jsx";
 import Footer from "../Footer/Footer.jsx";
-
+import { getWeather } from "../../utils/weatherApi.js";
+import { coordinates, APIkey } from "../../utils/constants.js";
 function App() {
   const [weatherData, setWeatherData] = useState({ type: "hot" });
   const [activeModal, setActiveModal] = useState("");
@@ -20,6 +21,9 @@ function App() {
     setActiveModal("preview");
     setSelectedCard(item);
   };
+  useEffect(() => {
+    getWeather(coordinates, APIkey);
+  }, []);
   return (
     <div className="page">
       <div className="page__content">
