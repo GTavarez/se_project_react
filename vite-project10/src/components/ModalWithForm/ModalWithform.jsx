@@ -9,7 +9,6 @@ function ModalWithForm({
   activeModal,
   onClose,
 }) {
-  console.log(children);
   return (
     <div className={`modal ${activeModal === "add-garment" && "modal_opened"}`}>
       <div className="modal__content modal__content_type_clothes">
