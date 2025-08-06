@@ -1,4 +1,4 @@
-import "./header.css";
+import "./Header.css";
 import avatar from "../../assets/avatar.png";
 import logo from "../../assets/logo.svg";
 function Header({ handleAddClick, weatherData }) {
