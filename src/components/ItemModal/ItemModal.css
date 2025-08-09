@@ -19,6 +19,8 @@
 .modal__close {
   position: absolute;
   border: none;
+  background-repeat: no-repeat;
+  background-image: url(../../assets/close.png);
   background-color: transparent;
 }
 .modal__footer {
