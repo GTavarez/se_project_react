@@ -16,8 +16,7 @@
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
 }
-.modal__close {
-  position: absolute;
+.modal__close_type_preview {
   border: none;
   background-repeat: no-repeat;
   background-image: url(../../assets/close.png);
