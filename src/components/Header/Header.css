@@ -1,4 +1,3 @@
-
 .header {
   display: flex;
   align-items: center;
@@ -8,13 +7,11 @@
   margin-right: 24px;
 }
 .header__add-clothes-btn {
-  margin-left: auto;
   margin-right: 20px;
   font-family: Cabinet Grotesk;
   font-weight: 700;
   font-style: Bold;
   font-size: 20px;
-  leading-trim: NONE;
   line-height: 24px;
   border: none;
   color: rgba(0, 0, 0, 1);
@@ -35,4 +32,8 @@
   font-size: 20px;
   line-height: 100%;
   color: rgba(0, 0, 0, 1);
+}
+.header__toggle-switch-container {
+  margin-left: auto;
+  margin-right: 20px;
 }
