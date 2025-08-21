@@ -1,0 +1,10 @@
+.clothes-section-options {
+  display: flex;
+  gap: 20px;
+  padding-left: 116px;
+}
+.clothes__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}

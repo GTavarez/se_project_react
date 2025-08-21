@@ -18,20 +18,22 @@
   padding-bottom: 24px;
 }
 .modal__close {
-  background-image: url(../../assets/close2.png);
   position: absolute;
-  top: 20px;
-  right: 28px;
-  width: 20px;
-  height: 20px;
   border: none;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  width: 16px;
+  height: 16px;
+  right: 30px;
+  top: 22px;
+}
+.modal__close_type_form {
+  background-image: url(../../assets/close-btn.png);
 }
 .modal__content {
   position: relative;
   background-color: #fff;
-  padding: 28px 28px 36px;
   max-width: 496px;
-  max-height: 436px;
   box-sizing: border-box;
   font-family: Cabinet Grotesk;
   font-weight: 700;
@@ -43,6 +45,7 @@
 .modal__content_type_clothes {
   height: 436px;
   width: 496px;
+  padding: 28px 28px 36px;
 }
 .modal__form {
   display: flex;

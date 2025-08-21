@@ -4,12 +4,14 @@ import Header from "../Header/Header.jsx";
 import Main from "../Main/Main.jsx";
 import ItemModal from "../ItemModal/ItemModal.jsx";
 import Footer from "../Footer/Footer.jsx";
+import Profile from "../Profile/Profile.jsx";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi.js";
 import { coordinates, APIkey } from "../../utils/constants.js";
-import CurrentTemperatureContext from "../context/CurrentTemperatureUnit.jsx";
+import CurrentTemperatureContext from "../../context/CurrentTemperatureUnit.jsx";
 import AddItemModal from "../AddItemModal/AddItemModal.jsx";
 import { defaultClothingItems } from "../../utils/constants.js";
 import { BrowserRouter } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 function App() {
   const [weatherData, setWeatherData] = useState({
     type: "",
@@ -53,32 +55,40 @@ function App() {
 
   return (
     <BrowserRouter>
-    <CurrentTemperatureContext.Provider
-      value={{ currentTemperatureUnit, handleToggleSwitchChange }}
-    >
-      <div className="page">
-        <div className="page__content">
-          <Header handleAddClick={handleAddClick} weatherData={weatherData} />
-          <Main
-            weatherData={weatherData}
-            setActiveModal={setActiveModal}
-            handleCardClick={handleCardClick}
-            clothingItems={clothingItems}
+      <CurrentTemperatureContext.Provider
+        value={{ currentTemperatureUnit, handleToggleSwitchChange }}
+      >
+        <div className="page">
+          <div className="page__content">
+            <Header handleAddClick={handleAddClick} weatherData={weatherData} />
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <Main
+                    weatherData={weatherData}
+                    setActiveModal={setActiveModal}
+                    handleCardClick={handleCardClick}
+                    clothingItems={clothingItems}
+                  />
+                }
+              />
+              <Route path="/profile" element={<Profile />} />
+            </Routes>
+          </div>
+          <AddItemModal
+            activeModal={activeModal}
+            onClose={closeActiveModal}
+            onAddItemSubmit={handleAddItemSubmit}
           />
+          <ItemModal
+            activeModal={activeModal}
+            card={selectedCard}
+            onClose={closeActiveModal}
+          />
+          <Footer />
         </div>
-        <AddItemModal
-          activeModal={activeModal}
-          onClose={closeActiveModal}
-          onAddItemSubmit={handleAddItemSubmit}
-        />
-        <ItemModal
-          activeModal={activeModal}
-          card={selectedCard}
-          onClose={closeActiveModal}
-        />
-        <Footer />
-      </div>
-    </CurrentTemperatureContext.Provider>
+      </CurrentTemperatureContext.Provider>
     </BrowserRouter>
   );
 }

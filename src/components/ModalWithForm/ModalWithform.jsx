@@ -2,7 +2,7 @@ import "./ModalWithForm.css";
 
 function ModalWithForm({
   children,
-  buttonText,
+  buttonText = "Save",
   title,
   activeModal,
   onClose,
@@ -14,7 +14,7 @@ function ModalWithForm({
         <h2 className="modal__title">{title}</h2>
         <button
           onClick={onClose}
-          className="modal__close"
+          className="modal__close modal__close_type_form"
           type="button"
         ></button>
         <form onSubmit={onSubmit} className="modal__form">
