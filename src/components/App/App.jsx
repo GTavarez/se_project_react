@@ -32,8 +32,8 @@ function App() {
   const closeActiveModal = () => {
     setActiveModal("");
   };
-  const handleAddItemSubmit = ({ name, url: imageUrl, weather }) => {
-    setClothingItems([{ name, imageUrl, weather }, ...clothingItems]);
+  const handleAddItemSubmit = ({ name, link, weather }) => {
+    setClothingItems([{ name, link, weather }, ...clothingItems]);
     closeActiveModal();
   };
 

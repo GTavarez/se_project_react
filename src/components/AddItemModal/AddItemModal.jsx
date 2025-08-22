@@ -1,6 +1,5 @@
 import "./AddItemModal.css";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
-import { useState } from "react";
 import { useForm } from "../../hooks/useForm";
 
 export default function AddItemModal({
@@ -8,17 +7,23 @@ export default function AddItemModal({
   onClose,
   onAddItemSubmit,
 }) {
-  const {values, handleChange} = useForm();
-  const [name, setName] = useState("");
+  const defaultValues = {
+    name: "",
+    link: "",
+    weather: "",
+  };
+  const { values, handleChange } = useForm(defaultValues);
+  /* const [name, setName] = useState("");
   const [imageUrl, setImageUrl] = useState("");
-  const [weather, setWeather] = useState("");
+  const [weather, setWeather] = useState(""); */
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onAddItemSubmit({ name, imageUrl, weather });
-    setName("");
-    setImageUrl("");
-    setWeather("");
+    onAddItemSubmit({
+      name: values.name,
+      link: values.link,
+      weather: values.weather,
+    });
   };
 
   return (
@@ -33,6 +38,7 @@ export default function AddItemModal({
       <label htmlFor="name" className="modal__label">
         Name{" "}
         <input
+          name="name"
           type="text"
           className="modal__input"
           id="name"
@@ -40,26 +46,22 @@ export default function AddItemModal({
           required
           maxLength="30"
           minLength="1"
-          value={name}
-          onChange={(e) => {
-            setName(e.target.value);
-          }}
+          value={values.name}
+          onChange={handleChange}
         />
       </label>
-      <label htmlFor="imageUrl" className="modal__label">
+      <label htmlFor="link" className="modal__label">
         Image{" "}
         <input
+          name="link"
           type="url"
           className="modal__input"
-          id="imageUrl"
+          id="link"
           placeholder="ImageUrl"
           required
-          maxLength="30"
           minLength="1"
-          value={imageUrl}
-          onChange={(e) => {
-            setImageUrl(e.target.value);
-          }}
+          value={values.link}
+          onChange={handleChange}
         />
       </label>
       <fieldset className="modal__radio-buttons">
@@ -72,10 +74,8 @@ export default function AddItemModal({
             alt=""
             className="modal__radio-input"
             value="hot"
-            onChange={(e) => {
-              setWeather(e.target.value);
-            }}
-            checked={weather === "hot"}
+            onChange={handleChange}
+            checked={values.weather === "hot"}
           />
           Hot
         </label>
@@ -86,10 +86,8 @@ export default function AddItemModal({
             name="weather"
             className="modal__radio-input"
             value="warm"
-            onChange={(e) => {
-              setWeather(e.target.value);
-            }}
-            checked={weather === "warm"}
+            onChange={handleChange}
+            checked={values.weather === "warm"}
           />
           Warm
         </label>
@@ -100,10 +98,8 @@ export default function AddItemModal({
             name="weather"
             className="modal__radio-input"
             value="cold"
-            onChange={(e) => {
-              setWeather(e.target.value);
-            }}
-            checked={weather === "cold"}
+            onChange={handleChange}
+            checked={values.weather === "cold"}
           />
           Cold
         </label>
