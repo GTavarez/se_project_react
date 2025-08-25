@@ -12,6 +12,7 @@ import AddItemModal from "../AddItemModal/AddItemModal.jsx";
 import { defaultClothingItems } from "../../utils/constants.js";
 import { BrowserRouter } from "react-router-dom";
 import { Routes, Route } from "react-router-dom";
+import { getItems, submitItems, updateItems } from "../../utils/api.js";
 function App() {
   const [weatherData, setWeatherData] = useState({
     type: "",
@@ -32,8 +33,14 @@ function App() {
   const closeActiveModal = () => {
     setActiveModal("");
   };
-  const handleAddItemSubmit = ({ name, link, weather }) => {
-    setClothingItems([{ name, link, weather }, ...clothingItems]);
+  const handleAddItemSubmit = async (item) => {
+   
+    getItems()
+      .then((data) => {
+        setClothingItems(data);
+      })
+      .catch(console.error);
+    submitItems(item);
     closeActiveModal();
   };
 
@@ -53,6 +60,14 @@ function App() {
       .catch(console.error);
   }, []);
 
+  useEffect(() => {
+    getItems()
+      .then((data) => {
+        setClothingItems(data);
+      })
+      .catch(console.error);
+  }, []);
+
   return (
     <BrowserRouter>
       <CurrentTemperatureContext.Provider
@@ -68,12 +83,15 @@ function App() {
                   <Main
                     weatherData={weatherData}
                     setActiveModal={setActiveModal}
-                    handleCardClick={handleCardClick}
+                    onCardClick={handleCardClick}
                     clothingItems={clothingItems}
                   />
                 }
               />
-              <Route path="/profile" element={<Profile />} />
+              <Route
+                path="/profile"
+                element={<Profile onCardClick={handleCardClick} />}
+              />
             </Routes>
           </div>
           <AddItemModal

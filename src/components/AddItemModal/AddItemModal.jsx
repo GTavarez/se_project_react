@@ -6,10 +6,11 @@ export default function AddItemModal({
   activeModal,
   onClose,
   onAddItemSubmit,
+  onUpdateItem,
 }) {
   const defaultValues = {
     name: "",
-    link: "",
+    imageUrl: "",
     weather: "",
   };
   const { values, handleChange } = useForm(defaultValues);
@@ -21,7 +22,7 @@ export default function AddItemModal({
     e.preventDefault();
     onAddItemSubmit({
       name: values.name,
-      link: values.link,
+      imageUrl: values.imageUrl,
       weather: values.weather,
     });
   };
@@ -34,6 +35,7 @@ export default function AddItemModal({
       activeModal={activeModal}
       onClose={onClose}
       onSubmit={handleSubmit}
+      onUpdate={onUpdateItem}
     >
       <label htmlFor="name" className="modal__label">
         Name{" "}
@@ -50,17 +52,17 @@ export default function AddItemModal({
           onChange={handleChange}
         />
       </label>
-      <label htmlFor="link" className="modal__label">
+      <label htmlFor="imageUrl" className="modal__label">
         Image{" "}
         <input
-          name="link"
+          name="imageUrl"
           type="url"
           className="modal__input"
-          id="link"
+          id="imageUrl"
           placeholder="ImageUrl"
           required
           minLength="1"
-          value={values.link}
+          value={values.imageUrl}
           onChange={handleChange}
         />
       </label>

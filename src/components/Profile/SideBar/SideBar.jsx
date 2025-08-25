@@ -1,5 +1,5 @@
 import "./SideBar.css";
-import avatar from "../../assets/avatar.png";
+import avatar from "/src/assets/avatar.png";
 
 const SideBar = () => {
   return (
