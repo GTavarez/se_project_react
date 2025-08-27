@@ -20,7 +20,6 @@
   background-image: url(../../assets/close.png);
   background-color: transparent;
   padding: 0;
-  
 }
 .modal__footer {
   font-family: Cabinet Grotesk;
@@ -43,9 +42,9 @@
   color: rgba(0, 0, 0, 1);
   margin: 0;
 }
-.modal__content-delete{
-  
-}
-.modal__question{
+.modal__delete {
+  border: none;
+  width: fit-content;
+  cursor: pointer;
 
 }

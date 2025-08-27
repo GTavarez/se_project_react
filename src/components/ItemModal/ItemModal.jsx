@@ -1,7 +1,7 @@
 import "./ItemModal.css";
-import { useState } from "react";
 
-function ItemModal({ activeModal, onClose, card, onDeleteButtonClick, clothingItems }) {
+
+function ItemModal({ activeModal, onClose, card, onDeleteButtonClick }) {
   return (
     <div className={`modal ${activeModal === "preview" && "modal_opened"}`}>
       <div className="modal__content modal__content_type_image">

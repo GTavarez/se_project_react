@@ -26,9 +26,10 @@
   height: 16px;
   right: 30px;
   top: 22px;
+  cursor: pointer;
 }
 .modal__close_type_form {
-  background-image: url(../../assets/close-btn.png);
+  background-image: url(../../assets/close-btn.svg);
 }
 .modal__content {
   position: relative;

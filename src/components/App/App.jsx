@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import Header from "../Header/Header.jsx";
 import Main from "../Main/Main.jsx";
@@ -13,12 +13,7 @@ import ConfirmationModal from "../ConfirmationModal/confirmationModal.jsx";
 import { defaultClothingItems } from "../../utils/constants.js";
 import { BrowserRouter } from "react-router-dom";
 import { Routes, Route } from "react-router-dom";
-import {
-  getItems,
-  submitItems,
-  updateItems,
-  deleteCard,
-} from "../../utils/api.js";
+import { getItems, submitItems, deleteCard } from "../../utils/api.js";
 function App() {
   const [weatherData, setWeatherData] = useState({
     type: "",
@@ -56,17 +51,16 @@ function App() {
       .catch(console.error);
     closeActiveModal();
   };
-  const handleClickDelete = useCallback(() => {
-    handleDeleteCard(selectedCard);
-  }, [selectedCard]);
-  const handleDeleteCard = async (item) => {
+
+ 
+
+  const handleDeleteCard = async () => {
     try {
       // deleting the card from the server
-      await deleteCard(item);
-
+      await deleteCard(selectedCard);
       // deleting the card locally (visually)
       setClothingItems((prevItems) =>
-        prevItems.filter((clothes) => item.id !== clothes.id)
+        prevItems.filter((clothes) => selectedCard.id !== clothes.id)
       );
       closeActiveModal();
       closeConfirmationModal();
@@ -121,7 +115,7 @@ function App() {
               />
               <Route
                 path="/profile"
-                element={<Profile onCardClick={handleCardClick} />}
+                element={<Profile onCardClick={handleCardClick} clothingItems={clothingItems}/>}
               />
             </Routes>
           </div>
@@ -134,14 +128,14 @@ function App() {
             activeModal={activeModal}
             card={selectedCard}
             onClose={closeActiveModal}
-            clothingItems={clothingItems}
             onDeleteButtonClick={openConfirmationModal}
           />
           <ConfirmationModal
             showConfirmation={showConfirmation}
             onSecondButtonClick={closeConfirmationModal}
             card={selectedCard}
-            onFirstButtonClick={handleClickDelete}
+            onFirstButtonClick={handleDeleteCard}
+            onClose={closeConfirmationModal}
           />
 
           <Footer />

@@ -1,11 +1,12 @@
 import "./ConfirmationModal.css";
-import { useState } from "react";
+
 
 function ConfirmationModal({
   showConfirmation,
   onFirstButtonClick,
   onSecondButtonClick,
   card,
+  onClose
 }) {
 
   return (
@@ -15,6 +16,11 @@ function ConfirmationModal({
           Are you sure you want to delete this item? This action is
           irreversible.
         </h2>
+        <button
+          onClick={onClose}
+          className="modal__close modal__close_type-confirmation"
+          type="button"
+        ></button>
         <button
           onClick={() => onFirstButtonClick(card)}
           type="button"
