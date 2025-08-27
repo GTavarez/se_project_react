@@ -12,6 +12,7 @@ function Main({ weatherData, onCardClick, clothingItems }) {
       <section className="cards">
         <p className="cards__text">
           Today is
+          
           {currentTemperatureUnit === "F"
             ? weatherData.temp.F
             : weatherData.temp.C}

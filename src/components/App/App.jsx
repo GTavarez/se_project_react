@@ -9,7 +9,7 @@ import { getWeather, filterWeatherData } from "../../utils/weatherApi.js";
 import { coordinates, APIkey } from "../../utils/constants.js";
 import CurrentTemperatureContext from "../../context/CurrentTemperatureUnit.jsx";
 import AddItemModal from "../AddItemModal/AddItemModal.jsx";
-import ConfirmationModal from "../ConfirmationModal/confirmationModal.jsx";
+import ConfirmationModal from "../ConfirmationModal/ConfirmationModal.jsx";
 import { defaultClothingItems } from "../../utils/constants.js";
 import { BrowserRouter } from "react-router-dom";
 import { Routes, Route } from "react-router-dom";
@@ -115,7 +115,7 @@ function App() {
               />
               <Route
                 path="/profile"
-                element={<Profile onCardClick={handleCardClick} clothingItems={clothingItems}/>}
+                element={<Profile onCardClick={handleCardClick} clothingItems={clothingItems} onAddItemSubmit={handleAddClick}/>}
               />
             </Routes>
           </div>

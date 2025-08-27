@@ -1,6 +1,7 @@
 import "./AddItemModal.css";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useForm } from "../../hooks/useForm";
+import { useEffect } from "react";
 
 export default function AddItemModal({
   activeModal,
@@ -10,19 +11,23 @@ export default function AddItemModal({
 }) {
   const defaultValues = {
     name: "",
-    imageUrl: "",
+    link: "",
     weather: "",
   };
-  const { values, handleChange } = useForm(defaultValues);
-  /* const [name, setName] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
-  const [weather, setWeather] = useState(""); */
+
+  const { values, handleChange, setValues } = useForm(defaultValues);
+
+  useEffect(() => {
+    if (activeModal) {
+      setValues(defaultValues); // Reset form when modal opens
+    }
+  }, [activeModal, setValues]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     onAddItemSubmit({
       name: values.name,
-      imageUrl: values.imageUrl,
+      link: values.link,
       weather: values.weather,
     });
   };
@@ -52,17 +57,17 @@ export default function AddItemModal({
           onChange={handleChange}
         />
       </label>
-      <label htmlFor="imageUrl" className="modal__label">
+      <label htmlFor="link" className="modal__label">
         Image{" "}
         <input
-          name="imageUrl"
+          name="link"
           type="url"
           className="modal__input"
-          id="imageUrl"
-          placeholder="ImageUrl"
+          id="link"
+          placeholder="link"
           required
           minLength="1"
-          value={values.imageUrl}
+          value={values.link}
           onChange={handleChange}
         />
       </label>
