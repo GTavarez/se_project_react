@@ -103,12 +103,6 @@
       "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/T-Shirt.png?etag=44ed1963c44ab19cd2f5011522c5fc09"
     },
     {
-      "name": "test",
-      "imageUrl": "https://www.powerpak.net/media/catalog/category/81817-81818-81819-81820-81821-81822-81823-Class-3-sweatshirt_1_1.jpg",
-      "weather": "warm",
-      "id": 18
-    },
-    {
       "name": "sweater",
       "imageUrl": "https://tse2.mm.bing.net/th/id/OIP.Rqey25Ly_E8ZlvxPwyVOSgHaE7?pid=Api&P=0&h=220",
       "weather": "cold",

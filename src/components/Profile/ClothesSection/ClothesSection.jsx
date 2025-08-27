@@ -4,12 +4,12 @@ import ItemCard from "../../ItemCard/ItemCard.jsx";
 
 const ClothesSection = ({ onCardClick, clothingItems }) => {
   return (
-    <div className="clothes-section">
-      <div className="clothes-section-options">
+    <div className="clothes__section">
+      <div className="clothes__section-options">
         <p>Your Items</p>
-        <button>Add New</button>
+        <button type="button" className="clothes__section__add-btn">+ Add New</button>
       </div>
-      <ul className="clothes-section__items">
+      <ul className="clothes__section-items">
         {clothingItems.map((item) => {
           return (
             <ItemCard key={item.id} item={item} onCardClick={onCardClick} />

@@ -18,6 +18,7 @@
 }
 .header__date-and-location {
   margin: 0;
+  color: rgba(0, 0, 0, 1);
 }
 .header__user-container {
   display: flex;
