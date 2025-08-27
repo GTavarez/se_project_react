@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import "./App.css";
 import Header from "../Header/Header.jsx";
 import Main from "../Main/Main.jsx";
@@ -9,10 +9,16 @@ import { getWeather, filterWeatherData } from "../../utils/weatherApi.js";
 import { coordinates, APIkey } from "../../utils/constants.js";
 import CurrentTemperatureContext from "../../context/CurrentTemperatureUnit.jsx";
 import AddItemModal from "../AddItemModal/AddItemModal.jsx";
+import ConfirmationModal from "../ConfirmationModal/confirmationModal.jsx";
 import { defaultClothingItems } from "../../utils/constants.js";
 import { BrowserRouter } from "react-router-dom";
 import { Routes, Route } from "react-router-dom";
-import { getItems, submitItems, updateItems } from "../../utils/api.js";
+import {
+  getItems,
+  submitItems,
+  updateItems,
+  deleteCard,
+} from "../../utils/api.js";
 function App() {
   const [weatherData, setWeatherData] = useState({
     type: "",
@@ -26,6 +32,14 @@ function App() {
   const [selectedCard, setSelectedCard] = useState([]);
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [clothingItems, setClothingItems] = useState(defaultClothingItems);
+  const [showConfirmation, setShowConfirmation] = useState(false);
+
+  const openConfirmationModal = () => {
+    setShowConfirmation(true);
+  };
+  const closeConfirmationModal = () => {
+    setShowConfirmation(false);
+  };
 
   const handleAddClick = () => {
     setActiveModal("add-garment");
@@ -34,14 +48,31 @@ function App() {
     setActiveModal("");
   };
   const handleAddItemSubmit = async (item) => {
-   
-    getItems()
+    await submitItems(item);
+    await getItems()
       .then((data) => {
         setClothingItems(data);
       })
       .catch(console.error);
-    submitItems(item);
     closeActiveModal();
+  };
+  const handleClickDelete = useCallback(() => {
+    handleDeleteCard(selectedCard);
+  }, [selectedCard]);
+  const handleDeleteCard = async (item) => {
+    try {
+      // deleting the card from the server
+      await deleteCard(item);
+
+      // deleting the card locally (visually)
+      setClothingItems((prevItems) =>
+        prevItems.filter((clothes) => item.id !== clothes.id)
+      );
+      closeActiveModal();
+      closeConfirmationModal();
+    } catch (error) {
+      console.error("Delete failed", error);
+    }
   };
 
   const handleToggleSwitchChange = () => {
@@ -103,7 +134,16 @@ function App() {
             activeModal={activeModal}
             card={selectedCard}
             onClose={closeActiveModal}
+            clothingItems={clothingItems}
+            onDeleteButtonClick={openConfirmationModal}
           />
+          <ConfirmationModal
+            showConfirmation={showConfirmation}
+            onSecondButtonClick={closeConfirmationModal}
+            card={selectedCard}
+            onFirstButtonClick={handleClickDelete}
+          />
+
           <Footer />
         </div>
       </CurrentTemperatureContext.Provider>

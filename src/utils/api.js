@@ -1,4 +1,4 @@
-const baseUrl = "http://localhost:3000";
+const baseUrl = "http://localhost:3001";
 
 function getItems() {
   return fetch(`${baseUrl}/items`).then((res) => {
@@ -16,8 +16,8 @@ function submitItems({ name, link, weather }) {
   });
 }
 
-function updateItems({name, link, weather}){
-   return fetch(`${baseUrl}/items`, {
+function updateItems({ name, link, weather }) {
+  return fetch(`${baseUrl}/items`, {
     method: "PATCH",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ name, link, weather }),
@@ -25,5 +25,13 @@ function updateItems({name, link, weather}){
     return res.ok ? res.json() : Promise.reject(`Error:${res.status}`);
   });
 }
+function deleteCard(item) {
+  return fetch(`${baseUrl}/items/${item.id}`, {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json" },
+  }).then((res) => {
+    return res.ok ? res.json() : Promise.reject(`Error:${res.status}`);
+  });
+}
 
-export { getItems, submitItems, updateItems };
+export { getItems, submitItems, updateItems, deleteCard };

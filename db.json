@@ -136,41 +136,13 @@
       "name": "test",
       "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Boot.png?etag=0953a2ea59f1c6ebc832fabacdc9c70e",
       "weather": "cold",
-      "id": 22
-    },
-    {
-      "name": "test",
-      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Boot.png?etag=0953a2ea59f1c6ebc832fabacdc9c70e",
-      "weather": "cold",
       "id": 23
-    },
-    {
-      "name": "test",
-      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Boot.png?etag=0953a2ea59f1c6ebc832fabacdc9c70e",
-      "weather": "cold",
-      "id": 24
-    },
-    {
-      "name": "test",
-      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Boot.png?etag=0953a2ea59f1c6ebc832fabacdc9c70e",
-      "weather": "cold",
-      "id": 25
     },
     {
       "name": "test",
       "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Boot.png?etag=0953a2ea59f1c6ebc832fabacdc9c70e",
       "weather": "warm",
       "id": 26
-    },
-    {
-      "name": "pants",
-      "weather": "cold",
-      "id": 27
-    },
-    {
-      "name": "test",
-      "weather": "cold",
-      "id": 28
     }
   ]
 }
