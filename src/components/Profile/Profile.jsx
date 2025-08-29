@@ -9,7 +9,11 @@ function Profile({ onCardClick, clothingItems, onAddItemSubmit }) {
         <SideBar />
       </section>
       <section className="profile__clothes-items">
-        <ClothesSection onCardClick={onCardClick} clothingItems={clothingItems} onAddItemSubmit={onAddItemSubmit}/>
+        <ClothesSection
+          onCardClick={onCardClick}
+          clothingItems={clothingItems}
+          onAddItemSubmit={onAddItemSubmit}
+        />
       </section>
     </div>
   );

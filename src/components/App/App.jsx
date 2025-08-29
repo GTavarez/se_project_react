@@ -43,24 +43,29 @@ function App() {
     setActiveModal("");
   };
   const handleAddItemSubmit = async (item) => {
-    await submitItems(item);
+    try {
+      const newItem = await submitItems(item);
+      setClothingItems((prevItems) => [newItem, ...prevItems]);
+    } catch (err) {
+      console.log(err);
+    }
+    /* await submitItems(item);
     await getItems()
       .then((data) => {
         setClothingItems(data);
       })
-      .catch(console.error);
+      .catch(console.error); */
     closeActiveModal();
   };
 
- 
-
   const handleDeleteCard = async () => {
     try {
+      
       // deleting the card from the server
       await deleteCard(selectedCard);
       // deleting the card locally (visually)
       setClothingItems((prevItems) =>
-        prevItems.filter((clothes) => selectedCard.id !== clothes.id)
+        prevItems.filter((clothes) => selectedCard._id !== clothes._id)
       );
       closeActiveModal();
       closeConfirmationModal();
@@ -115,7 +120,13 @@ function App() {
               />
               <Route
                 path="/profile"
-                element={<Profile onCardClick={handleCardClick} clothingItems={clothingItems} onAddItemSubmit={handleAddClick}/>}
+                element={
+                  <Profile
+                    onCardClick={handleCardClick}
+                    clothingItems={clothingItems}
+                    onAddItemSubmit={handleAddClick}
+                  />
+                }
               />
             </Routes>
           </div>

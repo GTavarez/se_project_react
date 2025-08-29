@@ -1,9 +1,11 @@
 const baseUrl = "http://localhost:3001";
 
+function checkResponse(res) {
+  return res.ok ? res.json() : Promise.reject(`Error:${res.status}`);
+}
+
 function getItems() {
-  return fetch(`${baseUrl}/items`).then((res) => {
-    return res.ok ? res.json() : Promise.reject(`Error:${res.status}`);
-  });
+  return fetch(`${baseUrl}/items`).then(checkResponse);
 }
 
 function submitItems({ name, link, weather }) {
@@ -11,27 +13,21 @@ function submitItems({ name, link, weather }) {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ name, link, weather }),
-  }).then((res) => {
-    return res.ok ? res.json() : Promise.reject(`Error:${res.status}`);
-  });
+  }).then(checkResponse);
 }
 
-function updateItems({ name, link, weather }) {
-  return fetch(`${baseUrl}/items`, {
+function updateItems({ name, link, weather, item }) {
+  return fetch(`${baseUrl}/items/${item._id}`, {
     method: "PATCH",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ name, link, weather }),
-  }).then((res) => {
-    return res.ok ? res.json() : Promise.reject(`Error:${res.status}`);
-  });
+  }).then(checkResponse);
 }
 function deleteCard(item) {
-  return fetch(`${baseUrl}/items/${item.id}`, {
+  console.log("Attempting to delete:", `${baseUrl}/items/${item._id}`);
+  return fetch(`${baseUrl}/items/${item._id}`, {
     method: "DELETE",
-    headers: { "Content-Type": "application/json" },
-  }).then((res) => {
-    return res.ok ? res.json() : Promise.reject(`Error:${res.status}`);
-  });
+  }).then(checkResponse);
 }
 
 export { getItems, submitItems, updateItems, deleteCard };

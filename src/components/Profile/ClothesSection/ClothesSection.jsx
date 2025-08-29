@@ -1,5 +1,4 @@
 import "./ClothesSection.css";
-import { defaultClothingItems } from "../../../utils/constants.js";
 import ItemCard from "../../ItemCard/ItemCard.jsx";
 
 const ClothesSection = ({ onCardClick, clothingItems, onAddItemSubmit }) => {
@@ -18,7 +17,7 @@ const ClothesSection = ({ onCardClick, clothingItems, onAddItemSubmit }) => {
       <ul className="clothes__section-items">
         {clothingItems.map((item) => {
           return (
-            <ItemCard key={item.id} item={item} onCardClick={onCardClick} />
+            <ItemCard key={item._id} item={item} onCardClick={onCardClick} />
           );
         })}
       </ul>

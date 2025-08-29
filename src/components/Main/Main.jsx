@@ -12,7 +12,6 @@ function Main({ weatherData, onCardClick, clothingItems }) {
       <section className="cards">
         <p className="cards__text">
           Today is
-          
           {currentTemperatureUnit === "F"
             ? weatherData.temp.F
             : weatherData.temp.C}
@@ -25,7 +24,11 @@ function Main({ weatherData, onCardClick, clothingItems }) {
             })
             .map((item) => {
               return (
-                <ItemCard key={item.id} item={item} onCardClick={onCardClick} />
+                <ItemCard
+                  key={item._id}
+                  item={item}
+                  onCardClick={onCardClick}
+                />
               );
             })}
         </ul>
