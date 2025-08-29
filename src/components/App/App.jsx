@@ -60,7 +60,6 @@ function App() {
 
   const handleDeleteCard = async () => {
     try {
-      
       // deleting the card from the server
       await deleteCard(selectedCard);
       // deleting the card locally (visually)

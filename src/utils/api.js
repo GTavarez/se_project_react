@@ -24,10 +24,9 @@ function updateItems({ name, link, weather, item }) {
   }).then(checkResponse);
 }
 function deleteCard(item) {
-  console.log("Attempting to delete:", `${baseUrl}/items/${item._id}`);
   return fetch(`${baseUrl}/items/${item._id}`, {
     method: "DELETE",
   }).then(checkResponse);
 }
 
-export { getItems, submitItems, updateItems, deleteCard };
+export { getItems, submitItems, updateItems, deleteCard, checkResponse };
