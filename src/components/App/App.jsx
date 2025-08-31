@@ -46,16 +46,10 @@ function App() {
     try {
       const newItem = await submitItems(item);
       setClothingItems((prevItems) => [newItem, ...prevItems]);
+      closeActiveModal();
     } catch (err) {
       console.log(err);
     }
-    /* await submitItems(item);
-    await getItems()
-      .then((data) => {
-        setClothingItems(data);
-      })
-      .catch(console.error); */
-    closeActiveModal();
   };
 
   const handleDeleteCard = async () => {
@@ -133,6 +127,7 @@ function App() {
             activeModal={activeModal}
             onClose={closeActiveModal}
             onAddItemSubmit={handleAddItemSubmit}
+            isOpen={activeModal === "add-garment"}
           />
           <ItemModal
             activeModal={activeModal}
