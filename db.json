@@ -124,12 +124,6 @@
       "name": "test",
       "link": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Boot.png?etag=0953a2ea59f1c6ebc832fabacdc9c70e",
       "weather": "cold",
-      "_id": 37
-    },
-    {
-      "name": "test",
-      "link": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Boot.png?etag=0953a2ea59f1c6ebc832fabacdc9c70e",
-      "weather": "cold",
       "_id": 38
     }
   ]

@@ -41,6 +41,7 @@ export default function AddItemModal({
       onClose={onClose}
       onSubmit={handleSubmit}
       onUpdate={onUpdateItem}
+      isOpen={activeModal === "add-garment"}
     >
       <label htmlFor="name" className="modal__label">
         Name{" "}
