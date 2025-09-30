@@ -11,7 +11,10 @@ function getItems() {
 function submitItems({ name, link, weather }) {
   return fetch(`${baseUrl}/items`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
     body: JSON.stringify({ name, link, weather }),
   }).then(checkResponse);
 }
@@ -23,10 +26,25 @@ function updateItems({ name, link, weather, item }) {
     body: JSON.stringify({ name, link, weather }),
   }).then(checkResponse);
 }
-function deleteCard(item) {
+function deleteCard(item, token) {
   return fetch(`${baseUrl}/items/${item._id}`, {
     method: "DELETE",
+    headers: { "Content-Type": "application/json" },
+    authorization: `Bearer ${token}`,
   }).then(checkResponse);
 }
-
-export { getItems, submitItems, updateItems, deleteCard, checkResponse };
+function addLike(item) {
+  return fetch(`${baseUrl}/items/likes/${item._id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    authorization: `Bearer ${token}`,
+  }).then(checkResponse);
+}
+export {
+  getItems,
+  submitItems,
+  updateItems,
+  deleteCard,
+  checkResponse,
+  addLike,
+};
