@@ -2,7 +2,7 @@ import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useForm } from "../../hooks/useForm";
 import { useEffect } from "react";
 
-export default function RegisterModal({ onSubmit, onClose, isOpen }) {
+export default function RegisterModal({ onRegister, onClose, isOpen }) {
   const defaultValues = {
     email: "",
     password: "",
@@ -20,7 +20,7 @@ export default function RegisterModal({ onSubmit, onClose, isOpen }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit({
+    onRegister({
       name: values.name,
       password: values.password,
       email: values.email,
@@ -93,10 +93,14 @@ export default function RegisterModal({ onSubmit, onClose, isOpen }) {
           onChange={handleChange}
         />
       </label>
-      <button type="submit" className="modal__signup-button">
+      <button
+        type="submit"
+        onClick={handleSubmit}
+        className="modal__signup-button"
+      >
         Sign Up
       </button>
-      <button type="button" className="modal__login-button">
+      <button type="button" onClick={onClose} className="modal__login-button">
         or Log In
       </button>
     </ModalWithForm>

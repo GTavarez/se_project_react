@@ -5,10 +5,16 @@ function checkResponse(res) {
 }
 
 function getItems() {
-  return fetch(`${baseUrl}/items`).then(checkResponse);
+  return fetch(`${baseUrl}/items`)
+    .then(res => {
+      if (res.ok) {
+        return res.json(); // ✅ This extracts the actual data
+      }
+      return Promise.reject(`Error: ${res.status}`);
+    });
 }
 
-function submitItems({ name, link, weather }) {
+function submitItems({ name, link, weather, token }) {
   return fetch(`${baseUrl}/items`, {
     method: "POST",
     headers: {
@@ -29,15 +35,28 @@ function updateItems({ name, link, weather, item }) {
 function deleteCard(item, token) {
   return fetch(`${baseUrl}/items/${item._id}`, {
     method: "DELETE",
-    headers: { "Content-Type": "application/json" },
-    authorization: `Bearer ${token}`,
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
   }).then(checkResponse);
 }
-function addLike(item) {
-  return fetch(`${baseUrl}/items/likes/${item._id}`, {
+function addLike(id, token) {
+  return fetch(`${baseUrl}/items/likes/${id}`, {
     method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    authorization: `Bearer ${token}`,
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+  }).then(checkResponse);
+}
+function removeLike(id, token) {
+  return fetch(`${baseUrl}/items/likes/${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
   }).then(checkResponse);
 }
 export {
@@ -47,4 +66,5 @@ export {
   deleteCard,
   checkResponse,
   addLike,
+  removeLike,
 };

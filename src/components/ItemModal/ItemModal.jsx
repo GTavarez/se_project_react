@@ -1,6 +1,20 @@
+import { deleteCard } from "../../utils/api";
 import "./ItemModal.css";
 
-function ItemModal({ activeModal, onClose, card, onDeleteButtonClick }) {
+function ItemModal({
+  activeModal,
+  onClose,
+  card,
+  onDeleteButtonClick,
+  currentUser,
+}) {
+  if (!currentUser) return null;
+  if (!card) return null;
+
+  const isOwn = card.owner === currentUser._id;
+  const itemDeleteButtonClassName = `modal__delete-button ${
+    isOwn ? "" : "modal__delete-button_hidden"
+  }`;
   return (
     <div className={`modal ${activeModal === "preview" && "modal_opened"}`}>
       <div className="modal__content modal__content_type_image">
@@ -13,13 +27,15 @@ function ItemModal({ activeModal, onClose, card, onDeleteButtonClick }) {
         <div className="modal__footer">
           <h2 className="modal__caption">{card.name}</h2>
           <p className="modal__weather">Weather: {card.weather}</p>
-          <button
-            onClick={onDeleteButtonClick}
-            className="modal__delete"
-            type="button"
-          >
-            Delete Item
-          </button>
+          {isOwn && (
+            <button
+              onClick={onDeleteButtonClick}
+              className={itemDeleteButtonClassName}
+              type="button"
+            >
+              Delete Item
+            </button>
+          )}
         </div>
       </div>
     </div>

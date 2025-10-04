@@ -1,7 +1,12 @@
 import "./ClothesSection.css";
 import ItemCard from "../../ItemCard/ItemCard.jsx";
+import React from "react";
 
 const ClothesSection = ({ onCardClick, clothingItems, onAddItemSubmit }) => {
+  const currentUser = React.useContext(CurrentUserContext);
+  const userItems = clothingItems.filter(
+    (item) => item.owner === currentUser._id
+  );
   return (
     <div className="clothes__section">
       <div className="clothes__section-options">
@@ -15,7 +20,7 @@ const ClothesSection = ({ onCardClick, clothingItems, onAddItemSubmit }) => {
         </button>
       </div>
       <ul className="clothes__section-items">
-        {clothingItems.map((item) => {
+        {userItems.map((item) => {
           return (
             <ItemCard key={item._id} item={item} onCardClick={onCardClick} />
           );

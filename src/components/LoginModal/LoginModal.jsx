@@ -1,19 +1,23 @@
+import React, { useState } from "react";
+import "./LoginModal.css";
+import { useForm } from "../../hooks/useForm.js";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
 export default function LoginModal({ isOpen, onClose, onSubmit }) {
-  /*  const defaultValues = {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  /* const defaultValues = {
     name: "",
     link: "",
     weather: "",
   };
 
-  const { values, handleChange, setValues } = useForm(defaultValues); */
-
-  /* useEffect(() => {
+  UseEffect(() => {
     if (activeModal) {
       setValues(defaultValues); // Reset form when modal opens
     }
   }, [activeModal, setValues]); */
+  const { values, handleChange } = useForm({ email: "", password: "" });
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -33,8 +37,22 @@ export default function LoginModal({ isOpen, onClose, onSubmit }) {
       onSubmit={handleSubmit}
       isOpen={isOpen}
     >
-      <input name="email" type="email" placeholder="Email" required />
-      <input name="password" type="password" placeholder="Password" required />
+      <input
+        name="email"
+        type="email"
+        value={values.email}
+        placeholder="Email"
+        required
+        onChange={handleChange}
+      />
+      <input
+        name="password"
+        type="password"
+        value={values.password}
+        onChange={handleChange}
+        placeholder="Password"
+        required
+      />
     </ModalWithForm>
   );
 }
