@@ -7,7 +7,7 @@ export default function RegisterModal({ onRegister, onClose, isOpen }) {
     email: "",
     password: "",
     name: "",
-    link: "",
+    avatar: "",
   };
 
   const { values, handleChange, setValues } = useForm(defaultValues);
@@ -24,7 +24,7 @@ export default function RegisterModal({ onRegister, onClose, isOpen }) {
       name: values.name,
       password: values.password,
       email: values.email,
-      link: values.link,
+      avatar: values.avatar,
     });
   };
 
@@ -82,14 +82,14 @@ export default function RegisterModal({ onRegister, onClose, isOpen }) {
       <label htmlFor="link" className="modal__label">
         Avatar{" "}
         <input
-          name="link"
+          name="avatar"
           type="url"
           className="modal__input"
-          id="link"
+          id="avatar"
           placeholder="Avatar link"
           required
           minLength="1"
-          value={values.link}
+          value={values.avatar}
           onChange={handleChange}
         />
       </label>

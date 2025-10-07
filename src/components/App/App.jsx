@@ -17,9 +17,15 @@ import {
   getItems,
   submitItems,
   deleteCard,
-  removeLike,
+  addCardLike,
+  removeCardLike,
 } from "../../utils/api.js";
-import { signup, signin, checkToken } from "../../utils/auth.js";
+import {
+  signup,
+  signin,
+  checkToken,
+  getCurrentUser,
+} from "../../utils/auth.js";
 import ProtectedRoute from "../ProtectedRoute.jsx/ProtectedRoute.jsx";
 import RegisterModal from "../RegisterModal/RegisterModal.jsx";
 import LoginModal from "../LoginModal/LoginModal.jsx";
@@ -61,55 +67,46 @@ function App() {
 
   const handleRegistration = ({ email, password, name, avatar }) => {
     signup({ email, password, name, avatar })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        throw new Error("Registration Failed");
+      .then((data) => {
+        return data;
       })
       .then(() => {
         setIsRegisterModalOpen(false);
         return signin({ email, password });
       })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        throw new Error("Sign in Failed");
-      })
       .then((data) => {
+        localStorage.setItem("jwt", data.token);
         setIsLoggedIn(true);
         setCurrentUser(data.user);
       })
       .catch((error) => {
-        console.error("Regiistration error", error);
+        console.error("Registration error", error);
       });
   };
 
   const handleLogin = ({ email, password }) => {
     signin({ email, password })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        } else {
-          return Promise.reject(`Error: ${res.status}`);
-        }
+      .then((data) => {
+        localStorage.setItem("jwt", data.token);
+        setIsLoggedIn(true);
+        return getCurrentUser(data.token);
       })
       .then((data) => {
         setIsLoggedIn(true);
-        setCurrentUser(data.user);
+        setCurrentUser(data);
         setIsLoginModalOpen(false);
       })
       .catch((error) => {
-        console.error("Login error", error);
+        console.error("Login error", error, error.message, error.stack);
       });
   };
   const handleAddItemSubmit = async (item) => {
     const token = localStorage.getItem("jwt");
+    const { name, link, weather } = item;
     api
-      .submitItems({ ...item, token })
+      .submitItems({ name, link, weather, token })
       .then((newItem) => {
-        setClothingItems([newItem, ...clothingItems]);
+        setClothingItems([...clothingItems, newItem]);
         closeActiveModal();
       })
       .catch((err) => {
@@ -133,7 +130,7 @@ function App() {
 
     !isLiked
       ? api
-          .addLike(id, token) // ← Pass token
+          .addCardLike(id, token) // ← Pass token
           .then((updatedCard) => {
             setClothingItems((cards) =>
               cards.map((item) => (item._id === id ? updatedCard : item))
@@ -141,7 +138,7 @@ function App() {
           })
           .catch((err) => console.log(err))
       : api
-          .removeLike(id, token) // ← Pass token
+          .removeCardLike(id, token) // ← Pass token
           .then((updatedCard) => {
             setClothingItems((cards) =>
               cards.map((item) => (item._id === id ? updatedCard : item))
@@ -168,7 +165,7 @@ function App() {
   useEffect(() => {
     getItems()
       .then((data) => {
-        setClothingItems(data);
+        setClothingItems(data.data);
       })
       .catch(console.error);
   }, []);
@@ -221,8 +218,9 @@ function App() {
                     <ProtectedRoute isLoggedIn={isLoggedIn}>
                       <Profile
                         onCardClick={handleCardClick}
+                        onCardLike={handleCardLike}
                         clothingItems={clothingItems}
-                        onAddItemSubmit={handleAddClick}
+                        onAddItemSubmit={handleAddItemSubmit}
                       />
                     </ProtectedRoute>
                   }

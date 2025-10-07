@@ -1,5 +1,7 @@
 import "./SideBar.css";
 import avatar from "/src/assets/avatar.png";
+import { useContext } from "react";
+
 
 const SideBar = () => {
   return (
