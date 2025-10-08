@@ -54,23 +54,18 @@ function Header({ handleAddClick, weatherData, onSignupModal, onLoginModal }) {
               </button>
               <p className="header__username">{currentUser.name}</p>
               {renderAvatar()}
-              <img
-                src={avatar}
-                alt="header avatar"
-                className="header__avatar"
-              />
             </div>
           ) : (
             <div className="header__auth-buttons">
               <button
-                className="header__Signup-button"
+                className="header__signup-button"
                 type="button"
                 onClick={onSignupModal}
               >
                 Sign Up
               </button>
               <button
-                className="header__Login-button"
+                className="header__login-button"
                 type="button"
                 onClick={onLoginModal}
               >

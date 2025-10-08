@@ -11,7 +11,7 @@ export default function AddItemModal({
 }) {
   const defaultValues = {
     name: "",
-    link: "",
+    imageUrl: "",
     weather: "",
   };
 
@@ -25,9 +25,10 @@ export default function AddItemModal({
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     onAddItemSubmit({
       name: values.name,
-      link: values.link,
+      imageUrl: values.imageUrl,
       weather: values.weather,
     });
   };
@@ -37,7 +38,6 @@ export default function AddItemModal({
       buttonText=""
       title="New garment"
       name="new-card"
-      activeModal={activeModal}
       onClose={onClose}
       onSubmit={handleSubmit}
       onUpdate={onUpdateItem}
@@ -58,17 +58,17 @@ export default function AddItemModal({
           onChange={handleChange}
         />
       </label>
-      <label htmlFor="link" className="modal__label">
+      <label htmlFor="imageUrl" className="modal__label">
         Image{" "}
         <input
-          name="link"
+          name="imageUrl"
           type="url"
           className="modal__input"
-          id="link"
-          placeholder="link"
+          id="imageUrl"
+          placeholder="imageUrl"
           required
           minLength="1"
-          value={values.link}
+          value={values.imageUrl}
           onChange={handleChange}
         />
       </label>

@@ -93,18 +93,24 @@ function App() {
       })
       .then((data) => {
         setIsLoggedIn(true);
-        setCurrentUser(data);
+        setCurrentUser(data.user);
         setIsLoginModalOpen(false);
       })
       .catch((error) => {
         console.error("Login error", error, error.message, error.stack);
       });
   };
-  const handleAddItemSubmit = async (item) => {
+  const handleCloseLoginModal = () => {
+    setIsLoginModalOpen(false);
+  };
+  const handleAddItemSubmit = (item) => {
     const token = localStorage.getItem("jwt");
-    const { name, link, weather } = item;
+    const { name, imageUrl, weather } = item;
+
+    console.log("Received item:", item);
+    console.log("Item type:", typeof item);
     api
-      .submitItems({ name, link, weather, token })
+      .submitItems({ name, imageUrl, weather, token })
       .then((newItem) => {
         setClothingItems([...clothingItems, newItem]);
         closeActiveModal();
@@ -133,7 +139,7 @@ function App() {
           .addCardLike(id, token) // ← Pass token
           .then((updatedCard) => {
             setClothingItems((cards) =>
-              cards.map((item) => (item._id === id ? updatedCard : item))
+              cards.map((item) => (item._id === id ? updatedCard.data : item))
             );
           })
           .catch((err) => console.log(err))
@@ -141,7 +147,7 @@ function App() {
           .removeCardLike(id, token) // ← Pass token
           .then((updatedCard) => {
             setClothingItems((cards) =>
-              cards.map((item) => (item._id === id ? updatedCard : item))
+              cards.map((item) => (item._id === id ? updatedCard.data : item))
             );
           })
           .catch((err) => console.log(err));
@@ -153,6 +159,11 @@ function App() {
     setActiveModal("preview");
     setSelectedCard(item);
   };
+  const switchToSignup = () => {
+    setIsRegisterModalOpen(true); // close login
+    setTimeout(() => setActiveModal("signup"), 300);
+  };
+
   useEffect(() => {
     getWeather(coordinates, APIkey)
       .then((data) => {
@@ -220,7 +231,7 @@ function App() {
                         onCardClick={handleCardClick}
                         onCardLike={handleCardLike}
                         clothingItems={clothingItems}
-                        onAddItemSubmit={handleAddItemSubmit}
+                        onClick={handleAddClick}
                       />
                     </ProtectedRoute>
                   }
@@ -254,9 +265,9 @@ function App() {
             />
             <LoginModal
               isOpen={isLoginModalOpen}
-              onClose={() => setIsLoginModalOpen(false)}
-              onSubmit={handleLogin}
+              onClose={handleCloseLoginModal}
               onLogin={handleLogin}
+              onSignupModal={switchToSignup}
             />
 
             <Footer />

@@ -6,8 +6,8 @@ import CurrentUserContext from "../../../context/CurrentUserContext.js";
 const ClothesSection = ({
   onCardClick,
   clothingItems,
-  onAddItemSubmit,
   onCardLike,
+  onClick,
 }) => {
   const currentUser = React.useContext(CurrentUserContext);
   const userItems = clothingItems.filter(
@@ -18,7 +18,7 @@ const ClothesSection = ({
       <div className="clothes__section-options">
         <p>Your Items</p>
         <button
-          onClick={onAddItemSubmit}
+          onClick={onClick}
           type="button"
           className="clothes__section__add-btn"
         >

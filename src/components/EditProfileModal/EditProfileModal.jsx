@@ -1,10 +1,15 @@
 // src/components/EditProfileModal.jsx
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
+
 import { updateProfile } from "../utils/userApi";
 import "./EditProfileModal.css"; // 👈 import the CSS file
 
-export default function EditProfileModal({ isOpen, onClose, currentUser, onUpdate }) {
+export default function EditProfileModal({
+  isOpen,
+  onClose,
+  currentUser,
+  onUpdate,
+}) {
   const [name, setName] = useState("");
   const [avatar, setAvatar] = useState("");
   const [error, setError] = useState("");
@@ -64,7 +69,10 @@ export default function EditProfileModal({ isOpen, onClose, currentUser, onUpdat
   if (!isOpen) return null;
 
   return (
-    <div className="modal-overlay" onMouseDown={(e) => e.target === e.currentTarget && onClose()}>
+    <div
+      className="modal-overlay"
+      onMouseDown={(e) => e.target === e.currentTarget && onClose()}
+    >
       <div className="modal">
         <header className="modal-header">
           <h2>Edit profile</h2>
@@ -99,7 +107,12 @@ export default function EditProfileModal({ isOpen, onClose, currentUser, onUpdat
           {error && <p className="error-text">{error}</p>}
 
           <div className="button-group">
-            <button type="button" className="btn cancel" onClick={onClose} disabled={loading}>
+            <button
+              type="button"
+              className="btn cancel"
+              onClick={onClose}
+              disabled={loading}
+            >
               Cancel
             </button>
             <button type="submit" className="btn save" disabled={loading}>
@@ -111,10 +124,3 @@ export default function EditProfileModal({ isOpen, onClose, currentUser, onUpdat
     </div>
   );
 }
-
-EditProfileModal.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired,
-  currentUser: PropTypes.object,
-  onUpdate: PropTypes.func.isRequired,
-};

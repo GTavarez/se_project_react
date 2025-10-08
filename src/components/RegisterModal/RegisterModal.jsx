@@ -1,3 +1,4 @@
+import "./RegisterModal.css";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useForm } from "../../hooks/useForm";
 import { useEffect } from "react";
@@ -30,12 +31,13 @@ export default function RegisterModal({ onRegister, onClose, isOpen }) {
 
   return (
     <ModalWithForm
-      buttonText=""
-      title="Sign Up"
-      name="register"
+      buttonText="Sign up"
+      title="Sign up"
+      name="Sign up"
       onClose={onClose}
       onSubmit={handleSubmit}
       isOpen={isOpen}
+      hideSubmitButton={true}
     >
       <label htmlFor="email" className="modal__label">
         Email{" "}
@@ -79,7 +81,7 @@ export default function RegisterModal({ onRegister, onClose, isOpen }) {
           onChange={handleChange}
         />
       </label>
-      <label htmlFor="link" className="modal__label">
+      <label htmlFor="avatar" className="modal__label">
         Avatar{" "}
         <input
           name="avatar"
@@ -93,16 +95,20 @@ export default function RegisterModal({ onRegister, onClose, isOpen }) {
           onChange={handleChange}
         />
       </label>
-      <button
-        type="submit"
-        onClick={handleSubmit}
-        className="modal__signup-button"
-      >
-        Sign Up
-      </button>
-      <button type="button" onClick={onClose} className="modal__login-button">
-        or Log In
-      </button>
+      <div className="modal__auth-buttons">
+        {
+          <button
+            type="submit"
+            onClick={handleSubmit}
+            className="modal__signup-button"
+          >
+            Sign Up
+          </button>
+        }
+        <button type="button" onClick={onClose} className="modal__login-button">
+          or Log In
+        </button>
+      </div>
     </ModalWithForm>
   );
 }

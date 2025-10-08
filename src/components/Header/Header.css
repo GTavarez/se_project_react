@@ -42,3 +42,26 @@
   text-decoration: none;
   color: black;
 }
+.header__auth-buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  font-family: Cabinet Grotesk;
+  font-weight: 700;
+  font-style: Bold;
+  font-size: 20px;
+}
+.header__login-button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+}
+.header__signup-button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+}

@@ -8,23 +8,23 @@ function getItems() {
   return fetch(`${baseUrl}/items`).then(checkResponse);
 }
 
-function submitItems({ name, link, weather, token }) {
-  console.log(token);
+function submitItems({ name, imageUrl, weather, token }) {
+  console.log({ name, imageUrl, weather, token });
   return fetch(`${baseUrl}/items`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
       authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({ name, imageUrl: link, weather }),
+    body: JSON.stringify({ name, imageUrl, weather }),
   }).then(checkResponse);
 }
 
-function updateItems({ name, link, weather, item }) {
+function updateItems({ name, imageUrl, weather, item }) {
   return fetch(`${baseUrl}/items/${item._id}`, {
     method: "PATCH",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ name, link, weather }),
+    body: JSON.stringify({ name, imageUrl, weather }),
   }).then(checkResponse);
 }
 function deleteCard(item, token) {
@@ -54,6 +54,22 @@ function removeCardLike(id, token) {
     },
   }).then(checkResponse);
 }
+function updateProfile({ name, avatar }) {
+  const token = getToken();
+  return fetch(`${BASE_URL}/users/me`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: token ? `Bearer ${token}` : "",
+    },
+    body: JSON.stringify({ name, avatar }),
+  })
+    .then(checkResponse)
+    .then((data) => {
+      // some responses return { user: {...} }, some return {...}
+      return data.user || data;
+    });
+}
 export {
   getItems,
   submitItems,
@@ -62,4 +78,5 @@ export {
   checkResponse,
   addCardLike,
   removeCardLike,
+  updateProfile,
 };

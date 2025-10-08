@@ -23,7 +23,6 @@ export const signup = ({ email, password, name, avatar }) => {
     });
 };
 export const signin = ({ email, password }) => {
-  console.log({ email, password });
   return fetch(`${BASE_URL}/signin`, {
     method: "POST",
     headers: {
