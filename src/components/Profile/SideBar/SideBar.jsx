@@ -1,6 +1,5 @@
 import "./SideBar.css";
-import avatar from "/src/assets/avatar.png";
-import { useContext, React } from "react";
+import { useContext } from "react";
 import CurrentUserContext from "../../../context/CurrentUserContext";
 
 const SideBar = () => {
@@ -21,6 +20,7 @@ const SideBar = () => {
       return <div className="header__avatar-placeholder">{firstLetter}</div>;
     }
   };
+
   return (
     <div className="sidebar">
       <img

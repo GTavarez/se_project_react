@@ -1,7 +1,6 @@
 const BASE_URL = "http://localhost:3001";
 
 export const signup = ({ email, password, name, avatar }) => {
-  console.log({ email, password, name, avatar });
   return fetch(`${BASE_URL}/signup`, {
     method: "POST",
     headers: {

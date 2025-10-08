@@ -1,11 +1,12 @@
 // src/components/EditProfileModal.jsx
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
-import { updateProfile } from "../utils/userApi";
+import { updateProfile } from "../../utils/api.js";
 import "./EditProfileModal.css"; // 👈 import the CSS file
 
 export default function EditProfileModal({
   isOpen,
+  activeModal,
   onClose,
   currentUser,
   onUpdate,
@@ -16,15 +17,15 @@ export default function EditProfileModal({
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (isOpen) {
+    if (activeModal) {
       setName(currentUser?.name || "");
       setAvatar(currentUser?.avatar || "");
       setError("");
     }
-  }, [isOpen, currentUser]);
+  }, [activeModal, currentUser]);
 
   useEffect(() => {
-    if (!isOpen) return;
+    if (!activeModal) return;
     const onKey = (e) => e.key === "Escape" && onClose();
     document.addEventListener("keydown", onKey);
     return () => document.removeEventListener("keydown", onKey);
@@ -100,7 +101,7 @@ export default function EditProfileModal({
               name="avatar"
               value={avatar}
               onChange={(e) => setAvatar(e.target.value)}
-              placeholder="https://..."
+              placeholder="imageUrl"
             />
           </label>
 

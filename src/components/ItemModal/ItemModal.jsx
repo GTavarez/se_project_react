@@ -1,4 +1,3 @@
-import { deleteCard } from "../../utils/api";
 import "./ItemModal.css";
 
 function ItemModal({

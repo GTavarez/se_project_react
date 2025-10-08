@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import "./LoginModal.css";
 import { useForm } from "../../hooks/useForm.js";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";

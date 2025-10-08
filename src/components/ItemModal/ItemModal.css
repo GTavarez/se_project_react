@@ -42,7 +42,7 @@
   color: rgba(0, 0, 0, 1);
   margin: 0;
 }
-.modal__delete {
+.modal__delete-button {
   border: none;
   width: fit-content;
   cursor: pointer;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import Header from "../Header/Header.jsx";
 import Main from "../Main/Main.jsx";
@@ -10,16 +10,9 @@ import { coordinates, APIkey } from "../../utils/constants.js";
 import CurrentTemperatureContext from "../../context/CurrentTemperatureUnit.jsx";
 import AddItemModal from "../AddItemModal/AddItemModal.jsx";
 import ConfirmationModal from "../ConfirmationModal/ConfirmationModal.jsx";
-import { defaultClothingItems } from "../../utils/constants.js";
 import { BrowserRouter } from "react-router-dom";
 import { Routes, Route } from "react-router-dom";
-import {
-  getItems,
-  submitItems,
-  deleteCard,
-  addCardLike,
-  removeCardLike,
-} from "../../utils/api.js";
+import { getItems } from "../../utils/api.js";
 import {
   signup,
   signin,
@@ -31,6 +24,7 @@ import RegisterModal from "../RegisterModal/RegisterModal.jsx";
 import LoginModal from "../LoginModal/LoginModal.jsx";
 import CurrentUserContext from "../../context/CurrentUserContext.js";
 import * as api from "../../utils/api.js";
+import EditProfileModal from "../EditProfileModal/EditProfileModal.jsx";
 function App() {
   const [weatherData, setWeatherData] = useState({
     type: "",
@@ -107,8 +101,6 @@ function App() {
     const token = localStorage.getItem("jwt");
     const { name, imageUrl, weather } = item;
 
-    console.log("Received item:", item);
-    console.log("Item type:", typeof item);
     api
       .submitItems({ name, imageUrl, weather, token })
       .then((newItem) => {
@@ -220,6 +212,8 @@ function App() {
                       onCardClick={handleCardClick}
                       clothingItems={clothingItems}
                       onCardLike={handleCardLike}
+                      onClose={closeActiveModal}
+                      card={selectedCard}
                     />
                   }
                 />
@@ -268,6 +262,10 @@ function App() {
               onClose={handleCloseLoginModal}
               onLogin={handleLogin}
               onSignupModal={switchToSignup}
+            />
+            <EditProfileModal
+              activeModal={activeModal}
+              currentUser={currentUser}
             />
 
             <Footer />
