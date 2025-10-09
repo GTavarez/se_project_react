@@ -11,6 +11,7 @@ function Profile({
   currentUser,
   onUpdate,
   onClose,
+  onSignOut
 }) {
   return (
     <div className="profile">
@@ -20,6 +21,7 @@ function Profile({
           onUpdate={onUpdate}
           onClose={onClose}
           currentUser={currentUser}
+          onSignOut={onSignOut}
         />
       </section>
       <section className="profile__clothes-items">

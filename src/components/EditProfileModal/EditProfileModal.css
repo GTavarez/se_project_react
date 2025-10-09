@@ -1,14 +1,7 @@
-input {
-  color: rgba(0, 0, 0, 1);
-}
-label {
-  color: rgba(0, 0, 0, 1);
-}
 .edit__profile-buttons {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  
 }
 .edit__profile_save-button {
   cursor: pointer;
@@ -29,4 +22,13 @@ label {
   font-weight: 700;
   font-style: Bold;
   font-size: 20px;
+}
+.modal__save-button {
+  cursor: pointer;
+  border: none;
+  background-color: black;
+  color: rgba(255, 255, 255, 1);
+  width: 128px;
+  height: 36px;
+  border-radius: 4px;
 }

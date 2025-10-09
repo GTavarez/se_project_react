@@ -1,7 +1,13 @@
 import "./SideBar.css";
 import EditProfileModal from "../../EditProfileModal/EditProfileModal";
 
-const SideBar = ({ activeModal, onUpdate, onClose, currentUser }) => {
+const SideBar = ({
+  activeModal,
+  onUpdate,
+  onClose,
+  currentUser,
+  onSignOut,
+}) => {
   /* const currentUser = useContext(CurrentUserContext); */
   const renderAvatar = () => {
     if (currentUser.avatar) {
@@ -33,7 +39,11 @@ const SideBar = ({ activeModal, onUpdate, onClose, currentUser }) => {
         >
           Change profile data
         </button>
-        <button type="submit" className="edit__profile_close-button">
+        <button
+          type="submit"
+          className="edit__profile_close-button"
+          onClick={onSignOut}
+        >
           Log out
         </button>
       </div>

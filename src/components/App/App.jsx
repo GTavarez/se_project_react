@@ -62,9 +62,7 @@ function App() {
   const handleCloseModal = () => {
     setActiveModal("");
   };
-  const handleUpdateUser = (updatedUser) => {
-    setCurrentUser(updatedUser.user);
-  };
+
   const handleRegisterModal = () => setIsRegisterModalOpen(true);
   const handleLoginModal = () => setIsLoginModalOpen(true);
 
@@ -174,6 +172,11 @@ function App() {
       })
       .catch((err) => console.log(err));
   };
+  const handleSignOut = () => {
+    localStorage.removeItem("jwt");
+    setIsLoggedIn(false);
+    setCurrentUser(null);
+  };
 
   useEffect(() => {
     getWeather(coordinates, APIkey)
@@ -197,7 +200,7 @@ function App() {
       checkToken(token)
         .then((data) => {
           setIsLoggedIn(true);
-          setCurrentUser(data);
+          setCurrentUser(data.user);
         })
         .catch((error) => {
           console.error("Token validation failed:", error);
@@ -247,8 +250,9 @@ function App() {
                         onClick={handleAddClick}
                         activeModal={activeModal}
                         currentUser={currentUser}
-                        onUpdate={handleEditProfile}
+                        onUpdate={handleOpenModal}
                         onClose={closeActiveModal}
+                        onSignOut={handleSignOut}
                       />
                     </ProtectedRoute>
                   }
@@ -290,7 +294,7 @@ function App() {
               isOpen={handleOpenModal}
               activeModal={activeModal}
               currentUser={currentUser}
-              onUpdate={handleUpdateUser}
+              onUpdate={handleEditProfile}
               onClose={handleCloseModal}
             />
 

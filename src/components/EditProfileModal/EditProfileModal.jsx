@@ -8,7 +8,6 @@ export default function EditProfileModal({
   onClose,
   onUpdate,
   currentUser,
-  isOpen,
 }) {
   const [name, setName] = useState("");
   const [avatar, setAvatar] = useState("");
@@ -102,11 +101,7 @@ export default function EditProfileModal({
       </label>
       <div className="modal__auth-buttons">
         {error && <p className="modal__error">{error}</p>}
-        <button
-          type="submit"
-          className="modal__signin-button"
-          disabled={loading}
-        >
+        <button type="submit" className="modal__save-button" disabled={loading}>
           {loading ? "Saving..." : "Save Changes"}
         </button>
       </div>
