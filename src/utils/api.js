@@ -58,7 +58,7 @@ function updateProfile({ name, avatar, token }) {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
-      Authorization: token ? `Bearer ${token}` : "",
+      authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({ name, avatar }),
   }).then(checkResponse);

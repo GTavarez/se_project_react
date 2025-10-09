@@ -4,7 +4,8 @@ import { useContext } from "react";
 
 function ItemCard({ item, onCardClick, onCardLike }) {
   const currentUser = useContext(CurrentUserContext);
-  const isLiked = item.likes.some((id) => id === currentUser?._id); //  Placeholder for like status
+  const isLiked =
+    item.likes && item.likes.some((id) => id === currentUser?._id); //  Placeholder for like status
 
   const handleCardClick = () => {
     onCardClick(item);

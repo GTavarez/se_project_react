@@ -42,7 +42,7 @@ export const signin = ({ email, password }) => {
       return data;
     });
 };
-export const checkToken = ({ token }) => {
+export const checkToken = (token) => {
   return fetch(`${BASE_URL}/users/me`, {
     method: "GET",
     headers: {
@@ -67,7 +67,7 @@ export const getCurrentUser = (token) => {
     if (res.ok) {
       return res.json();
     }
-    return res.json.then((errorData) => {
+    return res.json().then((errorData) => {
       throw new Error(errorData.message || `${res.status}`);
     });
   });

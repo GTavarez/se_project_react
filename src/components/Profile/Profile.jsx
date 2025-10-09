@@ -2,11 +2,25 @@ import SideBar from "./SideBar/SideBar";
 import ClothesSection from "./ClothesSection/ClothesSection";
 import "./Profile.css";
 
-function Profile({ onCardClick, clothingItems, onCardLike, onClick }) {
+function Profile({
+  onCardClick,
+  clothingItems,
+  onCardLike,
+  onClick,
+  activeModal,
+  currentUser,
+  onUpdate,
+  onClose,
+}) {
   return (
     <div className="profile">
       <section className="profile__sidebar">
-        <SideBar />
+        <SideBar
+          activeModal={activeModal}
+          onUpdate={onUpdate}
+          onClose={onClose}
+          currentUser={currentUser}
+        />
       </section>
       <section className="profile__clothes-items">
         <ClothesSection

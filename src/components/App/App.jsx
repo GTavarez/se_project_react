@@ -56,6 +56,15 @@ function App() {
   const closeActiveModal = () => {
     setActiveModal("");
   };
+  const handleOpenModal = () => {
+    setActiveModal("edit-profile");
+  };
+  const handleCloseModal = () => {
+    setActiveModal("");
+  };
+  const handleUpdateUser = (updatedUser) => {
+    setCurrentUser(updatedUser.user);
+  };
   const handleRegisterModal = () => setIsRegisterModalOpen(true);
   const handleLoginModal = () => setIsLoginModalOpen(true);
 
@@ -155,6 +164,16 @@ function App() {
     setIsRegisterModalOpen(true); // close login
     setTimeout(() => setActiveModal("signup"), 300);
   };
+  const handleEditProfile = ({ name, avatar }) => {
+    const token = localStorage.getItem("jwt");
+    api
+      .updateProfile({ name, avatar, token })
+      .then((data) => {
+        setCurrentUser(data.user);
+        setActiveModal("");
+      })
+      .catch((err) => console.log(err));
+  };
 
   useEffect(() => {
     getWeather(coordinates, APIkey)
@@ -226,6 +245,10 @@ function App() {
                         onCardLike={handleCardLike}
                         clothingItems={clothingItems}
                         onClick={handleAddClick}
+                        activeModal={activeModal}
+                        currentUser={currentUser}
+                        onUpdate={handleEditProfile}
+                        onClose={closeActiveModal}
                       />
                     </ProtectedRoute>
                   }
@@ -264,8 +287,11 @@ function App() {
               onSignupModal={switchToSignup}
             />
             <EditProfileModal
+              isOpen={handleOpenModal}
               activeModal={activeModal}
               currentUser={currentUser}
+              onUpdate={handleUpdateUser}
+              onClose={handleCloseModal}
             />
 
             <Footer />

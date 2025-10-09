@@ -1,14 +1,12 @@
 import "./ConfirmationModal.css";
 
-
 function ConfirmationModal({
   showConfirmation,
   onFirstButtonClick,
   onSecondButtonClick,
   card,
-  onClose
+  onClose,
 }) {
-
   return (
     <div className={`modal ${showConfirmation === true && "modal_opened"}`}>
       <div className="modal__content-delete">
@@ -22,7 +20,9 @@ function ConfirmationModal({
           type="button"
         ></button>
         <button
-          onClick={() => onFirstButtonClick(card)}
+          onClick={() => {
+            onFirstButtonClick(card), onClose();
+          }}
           type="button"
           className="modal__delete_btn"
         >

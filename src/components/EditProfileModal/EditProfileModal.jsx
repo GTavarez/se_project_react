@@ -1,20 +1,19 @@
-// src/components/EditProfileModal.jsx
-import { useEffect, useState } from "react";
-
+import { useState, useEffect } from "react"; // Add this line
 import { updateProfile } from "../../utils/api.js";
-import "./EditProfileModal.css"; // 👈 import the CSS file
+import ModalWithForm from "../ModalWithForm/ModalWithForm"; // Add this import
+import "./EditProfileModal.css";
 
 export default function EditProfileModal({
-  isOpen,
   activeModal,
   onClose,
-  currentUser,
   onUpdate,
+  currentUser,
+  isOpen,
 }) {
   const [name, setName] = useState("");
   const [avatar, setAvatar] = useState("");
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState("");
 
   useEffect(() => {
     if (activeModal) {
@@ -29,7 +28,7 @@ export default function EditProfileModal({
     const onKey = (e) => e.key === "Escape" && onClose();
     document.addEventListener("keydown", onKey);
     return () => document.removeEventListener("keydown", onKey);
-  }, [isOpen, onClose]);
+  }, [activeModal, onClose]);
 
   const validateUrl = (value) => {
     if (!value) return true;
@@ -55,7 +54,8 @@ export default function EditProfileModal({
     }
 
     setLoading(true);
-    updateProfile({ name: name.trim(), avatar: avatar.trim() })
+    const token = localStorage.getItem("jwt");
+    updateProfile({ name: name.trim(), avatar: avatar.trim(), token: token })
       .then((updatedUser) => {
         onUpdate(updatedUser);
         onClose();
@@ -67,61 +67,49 @@ export default function EditProfileModal({
       .finally(() => setLoading(false));
   };
 
-  if (!isOpen) return null;
+  if (activeModal !== "edit-profile") return null;
 
   return (
-    <div
-      className="modal-overlay"
-      onMouseDown={(e) => e.target === e.currentTarget && onClose()}
+    <ModalWithForm
+      title="Change profile data"
+      name="edit profile"
+      onClose={onClose}
+      onSubmit={handleSubmit}
+      isOpen={activeModal === "edit-profile"}
+      hideSubmitButton={" "}
     >
-      <div className="modal">
-        <header className="modal-header">
-          <h2>Edit profile</h2>
-          <button className="close-btn" onClick={onClose} aria-label="Close">
-            ×
-          </button>
-        </header>
+      <label htmlFor="name" className="modal__label">
+        Name
+        <input
+          name="name"
+          className="modal__input"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+          minLength={2}
+          maxLength={30}
+        />
+      </label>
 
-        <form className="modal-form" onSubmit={handleSubmit}>
-          <label>
-            Name
-            <input
-              name="name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-              minLength={2}
-              maxLength={30}
-            />
-          </label>
-
-          <label>
-            Avatar URL
-            <input
-              name="avatar"
-              value={avatar}
-              onChange={(e) => setAvatar(e.target.value)}
-              placeholder="imageUrl"
-            />
-          </label>
-
-          {error && <p className="error-text">{error}</p>}
-
-          <div className="button-group">
-            <button
-              type="button"
-              className="btn cancel"
-              onClick={onClose}
-              disabled={loading}
-            >
-              Cancel
-            </button>
-            <button type="submit" className="btn save" disabled={loading}>
-              {loading ? "Saving..." : "Save"}
-            </button>
-          </div>
-        </form>
+      <label htmlFor="avatar" className="modal__label">
+        Avatar
+        <input
+          name="avatar"
+          className="modal__input"
+          value={avatar}
+          onChange={(e) => setAvatar(e.target.value)}
+        />
+      </label>
+      <div className="modal__auth-buttons">
+        {error && <p className="modal__error">{error}</p>}
+        <button
+          type="submit"
+          className="modal__signin-button"
+          disabled={loading}
+        >
+          {loading ? "Saving..." : "Save Changes"}
+        </button>
       </div>
-    </div>
+    </ModalWithForm>
   );
 }
