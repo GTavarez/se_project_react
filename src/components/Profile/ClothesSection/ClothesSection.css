@@ -19,15 +19,13 @@
   color: rgba(0, 0, 0, 0.6);
   background-color: transparent;
   font-family: Cabinet Grotesk;
-  font-weight: 700;
-  font-style: Bold;
+  font-weight:Bold;
   font-size: 20px;
   line-height: 100%;
 }
 p {
   font-family: Cabinet Grotesk;
-  font-weight: 700;
-  font-style: Bold;
+  font-weight: Bold;
   font-size: 20px;
   color: rgba(0, 0, 0, 1);
   line-height: 100%;

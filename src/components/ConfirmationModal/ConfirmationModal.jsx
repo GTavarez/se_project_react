@@ -21,7 +21,8 @@ function ConfirmationModal({
         ></button>
         <button
           onClick={() => {
-            onFirstButtonClick(card), onClose();
+            onFirstButtonClick(card);
+            onClose();
           }}
           type="button"
           className="modal__delete_btn"

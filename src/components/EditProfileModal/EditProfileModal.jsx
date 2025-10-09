@@ -1,6 +1,5 @@
-import { useState, useEffect } from "react"; // Add this line
-import { updateProfile } from "../../utils/api.js";
-import ModalWithForm from "../ModalWithForm/ModalWithForm"; // Add this import
+import { useState, useEffect } from "react";
+import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import "./EditProfileModal.css";
 
 export default function EditProfileModal({
@@ -8,6 +7,7 @@ export default function EditProfileModal({
   onClose,
   onUpdate,
   currentUser,
+  isOpen,
 }) {
   const [name, setName] = useState("");
   const [avatar, setAvatar] = useState("");
@@ -15,19 +15,19 @@ export default function EditProfileModal({
   const [loading, setLoading] = useState("");
 
   useEffect(() => {
-    if (activeModal) {
+    if (isOpen) {
       setName(currentUser?.name || "");
       setAvatar(currentUser?.avatar || "");
       setError("");
     }
-  }, [activeModal, currentUser]);
+  }, [isOpen, currentUser]);
 
   useEffect(() => {
-    if (!activeModal) return;
+    if (!isOpen) return;
     const onKey = (e) => e.key === "Escape" && onClose();
     document.addEventListener("keydown", onKey);
     return () => document.removeEventListener("keydown", onKey);
-  }, [activeModal, onClose]);
+  }, [isOpen, onClose]);
 
   const validateUrl = (value) => {
     if (!value) return true;
@@ -53,29 +53,24 @@ export default function EditProfileModal({
     }
 
     setLoading(true);
-    const token = localStorage.getItem("jwt");
-    updateProfile({ name: name.trim(), avatar: avatar.trim(), token: token })
-      .then((updatedUser) => {
-        onUpdate(updatedUser);
+    onUpdate({ name: name.trim(), avatar: avatar.trim() })
+      .then(() => {
         onClose();
       })
       .catch((err) => {
-        console.error("Profile update failed:", err);
         setError(err.message || "Failed to update profile");
       })
       .finally(() => setLoading(false));
+    /* if (activeModal !== "edit-profile") return null; */
   };
-
-  if (activeModal !== "edit-profile") return null;
-
   return (
     <ModalWithForm
       title="Change profile data"
       name="edit profile"
       onClose={onClose}
       onSubmit={handleSubmit}
-      isOpen={activeModal === "edit-profile"}
-      hideSubmitButton={" "}
+      isOpen={isOpen}
+      hideSubmitButton={true}
     >
       <label htmlFor="name" className="modal__label">
         Name

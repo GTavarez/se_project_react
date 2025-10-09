@@ -19,7 +19,7 @@ import {
   checkToken,
   getCurrentUser,
 } from "../../utils/auth.js";
-import ProtectedRoute from "../ProtectedRoute.jsx/ProtectedRoute.jsx";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute.jsx";
 import RegisterModal from "../RegisterModal/RegisterModal.jsx";
 import LoginModal from "../LoginModal/LoginModal.jsx";
 import CurrentUserContext from "../../context/CurrentUserContext.js";
@@ -94,7 +94,7 @@ function App() {
       })
       .then((data) => {
         setIsLoggedIn(true);
-        setCurrentUser(data.user);
+        setCurrentUser(data);
         setIsLoginModalOpen(false);
       })
       .catch((error) => {
@@ -111,7 +111,7 @@ function App() {
     api
       .submitItems({ name, imageUrl, weather, token })
       .then((newItem) => {
-        setClothingItems([...clothingItems, newItem]);
+        setClothingItems([...clothingItems, newItem.data]);
         closeActiveModal();
       })
       .catch((err) => {
@@ -164,9 +164,10 @@ function App() {
   };
   const handleEditProfile = ({ name, avatar }) => {
     const token = localStorage.getItem("jwt");
-    api
+    return api
       .updateProfile({ name, avatar, token })
       .then((data) => {
+        console.log(data);
         setCurrentUser(data.user);
         setActiveModal("");
       })
@@ -291,7 +292,7 @@ function App() {
               onSignupModal={switchToSignup}
             />
             <EditProfileModal
-              isOpen={handleOpenModal}
+              isOpen={activeModal === "edit-profile"}
               activeModal={activeModal}
               currentUser={currentUser}
               onUpdate={handleEditProfile}

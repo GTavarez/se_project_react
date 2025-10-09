@@ -9,8 +9,7 @@
   color: rgba(0, 0, 0, 1);
   background-color: transparent;
   font-family: Cabinet Grotesk;
-  font-weight: 700;
-  font-style: Bold;
+  font-weight: Bold;
   font-size: 20px;
 }
 .edit__profile_close-button {
@@ -19,8 +18,7 @@
   color: rgba(0, 0, 0, 1);
   background-color: transparent;
   font-family: Cabinet Grotesk;
-  font-weight: 700;
-  font-style: Bold;
+  font-weight: Bold;
   font-size: 20px;
 }
 .modal__save-button {
