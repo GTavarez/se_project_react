@@ -3,7 +3,6 @@ import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import "./EditProfileModal.css";
 
 export default function EditProfileModal({
-  activeModal,
   onClose,
   onUpdate,
   currentUser,
