@@ -42,7 +42,7 @@ export const signin = ({ email, password }) => {
       return data;
     });
 };
-export const checkToken = (token) => {
+/* export const checkToken = (token) => {
   return fetch(`${BASE_URL}/users/me`, {
     method: "GET",
     headers: {
@@ -55,7 +55,7 @@ export const checkToken = (token) => {
     }
     throw new Error("Token is Invalid");
   });
-};
+}; */
 export const getCurrentUser = (token) => {
   return fetch(`${BASE_URL}/users/me`, {
     method: "GET",

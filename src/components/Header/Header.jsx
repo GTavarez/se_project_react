@@ -8,7 +8,7 @@ import CurrentUserContext from "../../context/CurrentUserContext";
 function Header({ handleAddClick, weatherData, onSignupModal, onLoginModal }) {
   const currentUser = React.useContext(CurrentUserContext);
   const renderAvatar = () => {
-    if (currentUser.avatar) {
+    if (currentUser?.avatar) {
       return (
         <img
           src={currentUser.avatar}
@@ -17,9 +17,10 @@ function Header({ handleAddClick, weatherData, onSignupModal, onLoginModal }) {
         />
       );
     } else {
-      const firstLetter = currentUser.name
-        ? currentUser.name.charAt(0).toUpperCase()
+      const firstLetter = currentUser?.name
+        ? currentUser?.name.charAt(0).toUpperCase()
         : "";
+
       return <div className="header__avatar-placeholder">{firstLetter}</div>;
     }
   };
@@ -51,7 +52,7 @@ function Header({ handleAddClick, weatherData, onSignupModal, onLoginModal }) {
               >
                 + Add clothes
               </button>
-              <p className="header__username">{currentUser.name}</p>
+              <p className="header__username">{currentUser?.name}</p>
               {renderAvatar()}
             </div>
           ) : (

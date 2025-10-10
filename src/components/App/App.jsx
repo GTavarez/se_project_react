@@ -13,12 +13,7 @@ import ConfirmationModal from "../ConfirmationModal/ConfirmationModal.jsx";
 import { BrowserRouter } from "react-router-dom";
 import { Routes, Route } from "react-router-dom";
 import { getItems } from "../../utils/api.js";
-import {
-  signup,
-  signin,
-  checkToken,
-  getCurrentUser,
-} from "../../utils/auth.js";
+import { signup, signin, getCurrentUser } from "../../utils/auth.js";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute.jsx";
 import RegisterModal from "../RegisterModal/RegisterModal.jsx";
 import LoginModal from "../LoginModal/LoginModal.jsx";
@@ -92,9 +87,9 @@ function App() {
         setIsLoggedIn(true);
         return getCurrentUser(data.token);
       })
-      .then((data) => {
+      .then((userData) => {
         setIsLoggedIn(true);
-        setCurrentUser(data);
+        setCurrentUser(userData.user);
         setIsLoginModalOpen(false);
       })
       .catch((error) => {
@@ -167,7 +162,6 @@ function App() {
     return api
       .updateProfile({ name, avatar, token })
       .then((data) => {
-        console.log(data);
         setCurrentUser(data.user);
         setActiveModal("");
       })
@@ -177,6 +171,10 @@ function App() {
     localStorage.removeItem("jwt");
     setIsLoggedIn(false);
     setCurrentUser(null);
+  };
+  const switchToLogin = () => {
+    setIsLoginModalOpen(true);
+    setTimeout(() => setActiveModal("login"), 300);
   };
 
   useEffect(() => {
@@ -198,7 +196,7 @@ function App() {
   useEffect(() => {
     const token = localStorage.getItem("jwt");
     if (token) {
-      checkToken(token)
+      getCurrentUser(token)
         .then((data) => {
           setIsLoggedIn(true);
           setCurrentUser(data.user);
@@ -284,6 +282,7 @@ function App() {
               isOpen={isRegisterModalOpen}
               onClose={() => setIsRegisterModalOpen(false)}
               onRegister={handleRegistration}
+              onLogin={switchToLogin}
             />
             <LoginModal
               isOpen={isLoginModalOpen}

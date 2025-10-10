@@ -1,14 +1,10 @@
 import "./SideBar.css";
 import EditProfileModal from "../../EditProfileModal/EditProfileModal";
+import { useContext } from "react";
+import CurrentUserContext from "../../../context/CurrentUserContext";
 
-const SideBar = ({
-  activeModal,
-  onUpdate,
-  onClose,
-  currentUser,
-  onSignOut,
-}) => {
-  /* const currentUser = useContext(CurrentUserContext); */
+const SideBar = ({ activeModal, onUpdate, onClose, onSignOut }) => {
+  const currentUser = useContext(CurrentUserContext);
   const renderAvatar = () => {
     if (currentUser.avatar) {
       return (
@@ -28,9 +24,12 @@ const SideBar = ({
 
   return (
     <div className="sidebar">
-      {renderAvatar()}
+      <div className="sidebar__display">
+        {renderAvatar()}
 
-      <p className="sidebar__username">{currentUser.name}</p>
+        <p className="sidebar__username">{currentUser.name}</p>
+      </div>
+
       <div className="edit__profile-buttons">
         <button
           type="button"
