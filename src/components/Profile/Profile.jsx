@@ -1,6 +1,8 @@
 import SideBar from "./SideBar/SideBar";
 import ClothesSection from "./ClothesSection/ClothesSection";
 import "./Profile.css";
+import CurrentUserContext from "../../context/CurrentUserContext";
+import { useContext } from "react";
 
 function Profile({
   onCardClick,
@@ -8,11 +10,11 @@ function Profile({
   onCardLike,
   onClick,
   activeModal,
-  currentUser,
   onUpdate,
   onClose,
-  onSignOut
+  onSignOut,
 }) {
+  const currentUser = useContext(CurrentUserContext);
   return (
     <div className="profile">
       <section className="profile__sidebar">

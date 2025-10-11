@@ -1,12 +1,15 @@
 import "./ItemModal.css";
+import CurrentUserContext from "../../context/CurrentUserContext";
+import React, { useContext } from "react";
+ 
 
 function ItemModal({
   activeModal,
   onClose,
   card,
   onDeleteButtonClick,
-  currentUser,
-}) {
+  }) {
+    const currentUser = React.useContext(CurrentUserContext);
   if (!currentUser) return null;
   if (!card) return null;
 

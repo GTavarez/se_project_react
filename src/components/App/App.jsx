@@ -248,7 +248,6 @@ function App() {
                         clothingItems={clothingItems}
                         onClick={handleAddClick}
                         activeModal={activeModal}
-                        currentUser={currentUser}
                         onUpdate={handleOpenModal}
                         onClose={closeActiveModal}
                         onSignOut={handleSignOut}
@@ -269,7 +268,6 @@ function App() {
               card={selectedCard}
               onClose={closeActiveModal}
               onDeleteButtonClick={openConfirmationModal}
-              currentUser={currentUser}
             />
             <ConfirmationModal
               showConfirmation={showConfirmation}
@@ -293,7 +291,6 @@ function App() {
             <EditProfileModal
               isOpen={activeModal === "edit-profile"}
               activeModal={activeModal}
-              currentUser={currentUser}
               onUpdate={handleEditProfile}
               onClose={handleCloseModal}
             />
