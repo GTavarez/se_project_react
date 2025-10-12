@@ -5,6 +5,9 @@ import CurrentUserContext from "../../../context/CurrentUserContext";
 
 const SideBar = ({ activeModal, onUpdate, onClose, onSignOut }) => {
   const currentUser = useContext(CurrentUserContext);
+  if (!currentUser) {
+    return null;
+  }
   const renderAvatar = () => {
     if (currentUser.avatar) {
       return (
