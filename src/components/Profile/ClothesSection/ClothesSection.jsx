@@ -10,9 +10,14 @@ const ClothesSection = ({
   onClick,
 }) => {
   const currentUser = React.useContext(CurrentUserContext);
+  if (!currentUser) {
+    return null;
+  }
+
   const userItems = clothingItems.filter(
     (item) => item.owner === currentUser._id
   );
+
   return (
     <div className="clothes__section">
       <div className="clothes__section-options">
