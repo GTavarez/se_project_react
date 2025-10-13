@@ -28,7 +28,7 @@ export default function LoginModal({
       isOpen={isOpen}
       hideSubmitButton={true}
     >
-      <label htmlFor="email" className="modal__label">
+      <label htmlFor="login-email" className="modal__label">
         Email{" "}
         <input
           name="email"
@@ -36,18 +36,20 @@ export default function LoginModal({
           className="modal__input"
           value={values.email}
           placeholder="Email"
-          id="email"
+          id="login-email"
+          autoComplete="username"
           required
           onChange={handleChange}
         />
       </label>
-      <label htmlFor="password" className="modal__label">
+      <label htmlFor="login-password" className="modal__label">
         Password{" "}
         <input
           name="password"
           type="password"
           className="modal__input"
-          id="password"
+          id="login-password"
+          autoComplete="current-password"
           value={values.password}
           onChange={handleChange}
           placeholder="Password"

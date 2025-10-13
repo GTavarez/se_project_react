@@ -44,26 +44,28 @@ export default function RegisterModal({
       isOpen={isOpen}
       hideSubmitButton={true}
     >
-      <label htmlFor="email" className="modal__label">
+      <label htmlFor="signup-email" className="modal__label">
         Email{" "}
         <input
           name="email"
           type="email"
           className="modal__input"
-          id="email"
+          id="signup-email"
+          autoComplete="username"
           placeholder="Email"
           required
           value={values.email}
           onChange={handleChange}
         />
       </label>
-      <label htmlFor="password" className="modal__label">
+      <label htmlFor="signup-password" className="modal__label">
         Password{" "}
         <input
           name="password"
           type="password"
           className="modal__input"
-          id="password"
+          id="signup-password"
+          autoComplete="current-password"
           placeholder="Password"
           required
           minLength="1"
@@ -71,13 +73,13 @@ export default function RegisterModal({
           onChange={handleChange}
         />
       </label>
-      <label htmlFor="name" className="modal__label">
+      <label htmlFor="signup-name" className="modal__label">
         Name{" "}
         <input
           name="name"
           type="text"
           className="modal__input"
-          id="name"
+          id="signup-name"
           placeholder="Name"
           required
           maxLength="30"
