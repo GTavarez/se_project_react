@@ -37,6 +37,7 @@ function App() {
   const [clothingItems, setClothingItems] = useState([]);
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
+  const [shouldResetLoginForm, setShouldResetLoginForm] = useState(false);
 
   const openConfirmationModal = () => {
     setShowConfirmation(true);
@@ -171,6 +172,7 @@ function App() {
     localStorage.removeItem("jwt");
     setIsLoggedIn(false);
     setCurrentUser(null);
+    setShouldResetLoginForm(true);
   };
   const switchToLogin = () => {
     setIsLoginModalOpen(true);
@@ -287,6 +289,8 @@ function App() {
               onClose={handleCloseLoginModal}
               onLogin={handleLogin}
               onSignupModal={switchToSignup}
+              shouldResetLoginForm={shouldResetLoginForm}
+              onResetComplete={() => setShouldResetLoginForm(false)}
             />
             <EditProfileModal
               isOpen={activeModal === "edit-profile"}

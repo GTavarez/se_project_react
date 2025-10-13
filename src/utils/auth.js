@@ -1,25 +1,26 @@
 const BASE_URL = "http://localhost:3001";
-/* function checkResponse(res) {
+function checkResponse(res) {
   if (res.ok) {
     return res.json();
   }
   return res.json().then((errorData) => {
     throw new Error(errorData.message || `server error: ${res.status}`);
   });
-} */
-function checkResponse(res) {
+}
+/* function checkResponse(res) {
   return res.text().then((text) => {
-    console.log("Raw response:", text);
     try {
-      return text ? JSON.parse(text): {};
+      return text ? JSON.parse(text) : {};
     } catch (e) {
-      throw new Error(`Invalid JSON response from server (status ${res.status})`);
+      throw new Error(
+        `Invalid JSON response from server (status ${res.status})`
+      );
     }
   });
-}
+} */
 
 export const signup = ({ email, password, name, avatar }) => {
-  return fetch(`${BASE_URL}/users/signup`, {
+  return fetch(`${BASE_URL}/signup`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -33,7 +34,7 @@ export const signup = ({ email, password, name, avatar }) => {
     });
 };
 export const signin = ({ email, password }) => {
-  return fetch(`${BASE_URL}/users/signin`, {
+  return fetch(`${BASE_URL}/signin`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

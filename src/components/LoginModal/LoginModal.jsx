@@ -1,14 +1,20 @@
 import "./LoginModal.css";
 import { useForm } from "../../hooks/useForm.js";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import { useEffect } from "react";
 
 export default function LoginModal({
   isOpen,
   onClose,
   onSignupModal,
   onLogin,
+  shouldResetLoginForm,
+  onResetComplete,
 }) {
-  const { values, handleChange } = useForm({ email: "", password: "" });
+  const { values, handleChange, resetForm } = useForm({
+    email: "",
+    password: "",
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -18,6 +24,13 @@ export default function LoginModal({
     };
     onLogin(formData);
   };
+  useEffect(() => {
+    if (shouldResetLoginForm) {
+      resetForm(); // or however you manage state
+      // Don't fOrget to reset the shouldResetForm flag!
+      onResetComplete();
+    }
+  }, [shouldResetLoginForm]);
 
   return (
     <ModalWithForm
