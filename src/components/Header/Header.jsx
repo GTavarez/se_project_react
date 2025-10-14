@@ -21,7 +21,7 @@ function Header({ handleAddClick, weatherData, onSignupModal, onLoginModal }) {
         ? currentUser?.name.charAt(0).toUpperCase()
         : "";
 
-      return <div className="header__avatar-placeholder">{firstLetter}</div>;
+      return <div className="header__avatar">{firstLetter}</div>;
     }
   };
 
@@ -41,40 +41,41 @@ function Header({ handleAddClick, weatherData, onSignupModal, onLoginModal }) {
       <div className="header__toggle-switch-container">
         <ToggleSwitch />
       </div>
-      <Link to="/profile" className="header__link">
-        <div className="header__user-container">
-          {currentUser ? (
-            <div className="header__user-info">
-              <button
-                onClick={handleAddClick}
-                type="button"
-                className="header__add-clothes-btn"
-              >
-                + Add clothes
-              </button>
+
+      <div className="header__user-container">
+        {currentUser ? (
+          <div className="header__user-info">
+            <button
+              onClick={handleAddClick}
+              type="button"
+              className="header__add-clothes-btn"
+            >
+              + Add clothes
+            </button>
+            <Link to="/profile" className="header__link">
               <p className="header__username">{currentUser?.name}</p>
               {renderAvatar()}
-            </div>
-          ) : (
-            <div className="header__auth-buttons">
-              <button
-                className="header__signup-button"
-                type="button"
-                onClick={onSignupModal}
-              >
-                Sign Up
-              </button>
-              <button
-                className="header__login-button"
-                type="button"
-                onClick={onLoginModal}
-              >
-                Log In
-              </button>
-            </div>
-          )}
-        </div>
-      </Link>
+            </Link>
+          </div>
+        ) : (
+          <div className="header__auth-buttons">
+            <button
+              className="header__signup-button"
+              type="button"
+              onClick={onSignupModal}
+            >
+              Sign Up
+            </button>
+            <button
+              className="header__login-button"
+              type="button"
+              onClick={onLoginModal}
+            >
+              Log In
+            </button>
+          </div>
+        )}
+      </div>
     </header>
   );
 }

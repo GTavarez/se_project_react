@@ -9,16 +9,20 @@
 .header__avatar {
   width: 40px;
   height: 40px;
-  border: solid 1px rgba(0, 0, 0, 1);
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .header__add-clothes-btn {
-  margin-right: 20px;
   font-family: Cabinet Grotesk;
   font-weight: Bold;
   font-size: 20px;
   line-height: 24px;
   border: none;
   color: rgba(0, 0, 0, 1);
+  padding: 0;
 }
 .header__date-and-location {
   margin: 0;
@@ -48,6 +52,8 @@
 .header__link {
   text-decoration: none;
   color: black;
+  display: flex;
+  gap: 12px;
 }
 .header__auth-buttons {
   display: flex;

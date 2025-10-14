@@ -14,14 +14,14 @@ const SideBar = ({ activeModal, onUpdate, onClose, onSignOut }) => {
         <img
           src={currentUser.avatar}
           alt={currentUser.name}
-          className="header__avatar"
+          className="sidebar__avatar"
         />
       );
     } else {
       const firstLetter = currentUser.name
         ? currentUser.name.charAt(0).toUpperCase()
         : "";
-      return <div className="header__avatar-placeholder">{firstLetter}</div>;
+      return <div className="sidebar__avatar">{firstLetter}</div>;
     }
   };
 

@@ -1,7 +1,6 @@
 .profile {
   display: flex;
   gap: 116px;
-  justify-content: space-between;
 }
 .profile__sidebar {
   width: 200px;
