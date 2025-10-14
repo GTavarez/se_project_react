@@ -44,7 +44,7 @@ export default function RegisterModal({
       isOpen={isOpen}
       hideSubmitButton={true}
     >
-      <label htmlFor="signup-email" className="modal__label">
+      <label className="modal__label">
         Email{" "}
         <input
           name="email"
@@ -58,7 +58,7 @@ export default function RegisterModal({
           onChange={handleChange}
         />
       </label>
-      <label htmlFor="signup-password" className="modal__label">
+      <label className="modal__label">
         Password{" "}
         <input
           name="password"
@@ -73,7 +73,7 @@ export default function RegisterModal({
           onChange={handleChange}
         />
       </label>
-      <label htmlFor="signup-name" className="modal__label">
+      <label className="modal__label">
         Name{" "}
         <input
           name="name"
@@ -88,7 +88,7 @@ export default function RegisterModal({
           onChange={handleChange}
         />
       </label>
-      <label htmlFor="avatar" className="modal__label">
+      <label className="modal__label">
         Avatar{" "}
         <input
           name="avatar"

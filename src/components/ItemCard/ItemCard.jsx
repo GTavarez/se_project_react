@@ -26,11 +26,13 @@ function ItemCard({ item, onCardClick, onCardLike }) {
         src={item.imageUrl}
         alt={item.name}
       ></img>
-      <button
-        className={itemLikeButtonClassName}
-        type="button"
-        onClick={handleLike}
-      ></button>
+      {currentUser && (
+        <button
+          className={itemLikeButtonClassName}
+          type="button"
+          onClick={handleLike}
+        ></button>
+      )}
     </li>
   );
 }

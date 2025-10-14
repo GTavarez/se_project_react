@@ -55,9 +55,6 @@ function App() {
   const handleOpenModal = () => {
     setActiveModal("edit-profile");
   };
-  const handleCloseModal = () => {
-    setActiveModal("");
-  };
 
   const handleRegisterModal = () => setIsRegisterModalOpen(true);
   const handleLoginModal = () => setIsLoginModalOpen(true);
@@ -107,7 +104,7 @@ function App() {
     api
       .submitItems({ name, imageUrl, weather, token })
       .then((newItem) => {
-        setClothingItems([...clothingItems, newItem.data]);
+        setClothingItems([newItem.data, ...clothingItems]);
         closeActiveModal();
       })
       .catch((err) => {
@@ -164,7 +161,7 @@ function App() {
       .updateProfile({ name, avatar, token })
       .then((data) => {
         setCurrentUser(data.user);
-        setActiveModal("");
+        closeActiveModal();
       })
       .catch((err) => console.log(err));
   };
@@ -296,7 +293,7 @@ function App() {
               isOpen={activeModal === "edit-profile"}
               activeModal={activeModal}
               onUpdate={handleEditProfile}
-              onClose={handleCloseModal}
+              onClose={closeActiveModal}
             />
 
             <Footer />

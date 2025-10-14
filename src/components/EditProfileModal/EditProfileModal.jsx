@@ -68,7 +68,7 @@ export default function EditProfileModal({ onClose, onUpdate, isOpen }) {
       isOpen={isOpen}
       hideSubmitButton={true}
     >
-      <label htmlFor="name" className="modal__label">
+      <label className="modal__label">
         Name
         <input
           name="name"
@@ -81,7 +81,7 @@ export default function EditProfileModal({ onClose, onUpdate, isOpen }) {
         />
       </label>
 
-      <label htmlFor="avatar" className="modal__label">
+      <label className="modal__label">
         Avatar
         <input
           name="avatar"

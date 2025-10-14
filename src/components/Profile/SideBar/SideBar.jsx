@@ -1,9 +1,8 @@
 import "./SideBar.css";
-import EditProfileModal from "../../EditProfileModal/EditProfileModal";
 import { useContext } from "react";
 import CurrentUserContext from "../../../context/CurrentUserContext";
 
-const SideBar = ({ activeModal, onUpdate, onClose, onSignOut }) => {
+const SideBar = ({ onUpdate, onSignOut }) => {
   const currentUser = useContext(CurrentUserContext);
   if (!currentUser) {
     return null;
@@ -49,14 +48,6 @@ const SideBar = ({ activeModal, onUpdate, onClose, onSignOut }) => {
           Log out
         </button>
       </div>
-      {activeModal === "edit-profile" && (
-        <EditProfileModal
-          activeModal={activeModal}
-          currentUser={currentUser}
-          onUpdate={onUpdate}
-          onClose={onClose}
-        />
-      )}
     </div>
   );
 };
