@@ -91,7 +91,7 @@ function App() {
         setIsLoginModalOpen(false);
       })
       .catch((error) => {
-        console.error("Login error", error, error.message, error.stack);
+        console.error("Login error", error.message);
       });
   };
   const handleCloseLoginModal = () => {

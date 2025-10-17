@@ -1,23 +1,5 @@
 const BASE_URL = "http://localhost:3001";
-function checkResponse(res) {
-  if (res.ok) {
-    return res.json();
-  }
-  return res.json().then((errorData) => {
-    throw new Error(errorData.message || `server error: ${res.status}`);
-  });
-}
-/* function checkResponse(res) {
-  return res.text().then((text) => {
-    try {
-      return text ? JSON.parse(text) : {};
-    } catch (e) {
-      throw new Error(
-        `Invalid JSON response from server (status ${res.status})`
-      );
-    }
-  });
-} */
+import { checkResponse } from "./api";
 
 export const signup = ({ email, password, name, avatar }) => {
   return fetch(`${BASE_URL}/signup`, {
