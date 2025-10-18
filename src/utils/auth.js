@@ -1,8 +1,8 @@
-const BASE_URL = "http://localhost:3001";
+import { baseUrl } from "./constants.js";
 import { checkResponse } from "./api";
 
 export const signup = ({ email, password, name, avatar }) => {
-  return fetch(`${BASE_URL}/signup`, {
+  return fetch(`${baseUrl}/signup`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -16,7 +16,7 @@ export const signup = ({ email, password, name, avatar }) => {
     });
 };
 export const signin = ({ email, password }) => {
-  return fetch(`${BASE_URL}/signin`, {
+  return fetch(`${baseUrl}/signin`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -44,7 +44,7 @@ export const signin = ({ email, password }) => {
   });
 }; */
 export const getCurrentUser = (token) => {
-  return fetch(`${BASE_URL}/users/me`, {
+  return fetch(`${baseUrl}/users/me`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
