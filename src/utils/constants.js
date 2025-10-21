@@ -112,6 +112,6 @@ export const coordinates = {
 };
 export const APIkey = "8f49e84f5732d866a48231fa2cd9a89d";
 export const baseUrl =
-  process.env.NODE_ENV === "production"
+  import.meta.env.MODE === "production"
     ? "https://api.weatherandwear.jumpingcrab.com"
     : "http://localhost:3001";
