@@ -13,6 +13,12 @@ Frontend (React): https://github.com/GTavarez/se_project_react
 
 Backend (Express): https://github.com/GTavarez/se_project_express
 
+🌐 Depleyed Projects's domain name
+
+Deployed Application: https://weatherandwear.jumpingcrab.com
+
+Project Pitch Video: https://drive.google.com/file/d/1NgoUgaE0QPb9Bdt5nc4SPuJvggX_oyZI/view?usp=drive_link
+
 🧩 Tech Stack
 
 Frontend
